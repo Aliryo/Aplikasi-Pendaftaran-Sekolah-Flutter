@@ -1,6 +1,8 @@
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,8 +89,69 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          16.0.height,
+          CarouselSlider(
+            items: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16.r),
+                child: Image.asset(
+                  AppImages.kegiatan,
+                  width: 360.w,
+                  height: 200.h,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+            options: CarouselOptions(
+              height: 180.h,
+              viewportFraction: 1,
+              autoPlay: true,
+              initialPage: 0,
+              onPageChanged: (index, reason) {},
+            ),
+          ),
+          4.0.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              indicator(1),
+            ],
+          ),
+          16.0.height,
+          const Text(
+            'Berita Sekolah',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          16.0.height,
+          const WidgetNewsList(
+            image: AppImages.berita1,
+            title: 'Acara halal bihalal setelah Idul Fitri',
+            subtitle:
+                'Setelah libur lebaran idul fitri selesai, sekolah mengadakan acara halal bihalal antara guru dan murid, sebagai bentuk pengajaran pendidikan.',
+            date: 'Senin, 27 April 2023',
+          ),
+          const WidgetNewsList(
+            image: AppImages.berita2,
+            title: 'Persipan lomba pesta siaga',
+            subtitle:
+                'Dalam rangka menyambut perlombaan persta siaga antar SD di kecamatan tembalang, semarang, siswa mengadakan latihan kegiatan.',
+            date: 'Senin, 26 April 2023',
+          ),
         ],
       ),
+    );
+  }
+
+  Widget indicator(int index) {
+    return Container(
+      width: 40.w,
+      height: 8.h,
+      margin: EdgeInsets.symmetric(horizontal: 2.w),
+      decoration: BoxDecoration(
+          color: Colors.green, borderRadius: BorderRadius.circular(3.w)),
     );
   }
 }
