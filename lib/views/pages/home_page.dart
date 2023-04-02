@@ -1,5 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -53,28 +54,38 @@ class HomePage extends StatelessWidget {
           Wrap(
             runSpacing: 16.h,
             spacing: 8.w,
-            children: const [
+            children: [
               WidgetCardHome(
+                onTap: () {},
                 image: AppImages.register,
                 title: 'Pendaftaran\nSiswa baru',
               ),
               WidgetCardHome(
+                onTap: () {},
                 image: AppImages.student,
                 title: 'Daftar\nCalon Siswa',
               ),
               WidgetCardHome(
+                onTap: () {},
                 image: AppImages.schedule,
                 title: 'Jadwal\nPendaftaran',
               ),
               WidgetCardHome(
+                onTap: () {},
                 image: AppImages.school,
                 title: 'Profil Sekolah',
               ),
               WidgetCardHome(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => const ContactUsAlert());
+                },
                 image: AppImages.contactUs,
                 title: 'Hubungi Kami',
               ),
               WidgetCardHome(
+                onTap: () {},
                 image: AppImages.setting,
                 title: 'Pengaturan',
               ),
