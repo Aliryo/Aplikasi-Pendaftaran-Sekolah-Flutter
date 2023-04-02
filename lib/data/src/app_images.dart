@@ -1,4 +1,5 @@
 class AppImages {
+  static const String splash = "assets/tutwuri.png";
   static const String avatar = "assets/avatar.png";
   static const String register = "assets/register.png";
   static const String schedule = "assets/schedule.png";

@@ -1,4 +1,4 @@
-import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return Builder(builder: (context) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'Aplikasi Pendaftaran',
               theme: ThemeData(
                 primarySwatch: Colors.green,
               ),
-              home: const HomePage(),
+              home: const SplashPage(),
             );
           });
         });

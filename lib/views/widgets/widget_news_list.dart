@@ -1,4 +1,3 @@
-import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -3,7 +3,6 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
