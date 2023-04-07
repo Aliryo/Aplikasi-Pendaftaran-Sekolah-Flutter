@@ -1,6 +1,9 @@
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran_siswa_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +27,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hallo, Adit Putra Legeda',
+              'Hallo, Jefri Nichol',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -56,12 +59,26 @@ class HomePage extends StatelessWidget {
             spacing: 8.w,
             children: [
               WidgetCardHome(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PendaftaranSiswaBaruPage(),
+                    ),
+                  );
+                },
                 image: AppImages.register,
                 title: 'Pendaftaran\nSiswa baru',
               ),
               WidgetCardHome(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DaftarCalonSiswaPage(),
+                    ),
+                  );
+                },
                 image: AppImages.student,
                 title: 'Daftar\nCalon Siswa',
               ),
@@ -71,7 +88,14 @@ class HomePage extends StatelessWidget {
                 title: 'Jadwal\nPendaftaran',
               ),
               WidgetCardHome(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfilSekolahPage(),
+                    ),
+                  );
+                },
                 image: AppImages.school,
                 title: 'Profil Sekolah',
               ),

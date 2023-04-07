@@ -1,5 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -125,7 +126,7 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           42.0.height,
-          GestureDetector(
+          WidgetButton(
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
@@ -134,22 +135,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   (route) => false);
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20.h),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: const Text(
-                'Daftar',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            title: 'Daftar',
           ),
           24.0.height,
           Row(
