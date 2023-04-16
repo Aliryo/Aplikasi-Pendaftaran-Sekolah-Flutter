@@ -2,6 +2,7 @@ import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
@@ -83,7 +84,14 @@ class HomePage extends StatelessWidget {
                 title: 'Daftar\nCalon Siswa',
               ),
               WidgetCardHome(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const JadwalPendaftaranPage(),
+                    ),
+                  );
+                },
                 image: AppImages.schedule,
                 title: 'Jadwal\nPendaftaran',
               ),
