@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidgetButton extends StatelessWidget {
-  const WidgetButton({super.key, required this.title, this.onTap});
+  const WidgetButton(
+      {super.key, required this.title, this.onTap, this.color = Colors.green});
+  final Color color;
   final String title;
   final Function()? onTap;
 
@@ -13,7 +15,7 @@ class WidgetButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20.h),
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: color,
           borderRadius: BorderRadius.circular(16.r),
         ),
         child: Text(
