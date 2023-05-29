@@ -10,7 +10,7 @@ import '../../controller/auth_controller.dart';
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
 
-  final AuthController controller = Get.find();
+  final AuthController controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,8 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,controller: controller.nameController,
+              textInputAction: TextInputAction.search,
+              controller: controller.nameController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan nama lengkap anda',
@@ -63,7 +64,8 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,controller: controller.emailController,
+              textInputAction: TextInputAction.search,
+              controller: controller.emailController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan email anda',
@@ -90,7 +92,8 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,controller: controller.passwordController,
+              textInputAction: TextInputAction.search,
+              controller: controller.passwordController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan password anda',
@@ -117,7 +120,8 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,controller: controller.confirmController,
+              textInputAction: TextInputAction.search,
+              controller: controller.confirmController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Konfirmasi password anda',
@@ -130,7 +134,7 @@ class SignUpPage extends StatelessWidget {
           42.0.height,
           WidgetButton(
             onTap: () {
-             controller.register();
+              controller.register();
             },
             title: 'Daftar',
           ),

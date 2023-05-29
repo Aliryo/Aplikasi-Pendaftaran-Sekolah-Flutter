@@ -4,6 +4,8 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../services/user_service.dart';
+
 class AuthController extends GetxController {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -45,6 +47,14 @@ class AuthController extends GetxController {
     } catch (e) {
       isLoginLoading.value = false;
 
+      throw Exception(e.toString());
+    }
+  }
+   void getCurrentUser(String id) async {
+    try {
+     var data = await UserService().getUser(id);
+   user.value = data;
+    } catch (e) {
       throw Exception(e.toString());
     }
   }

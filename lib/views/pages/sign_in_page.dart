@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SignInPage extends StatelessWidget {
-SignInPage({super.key});
-final AuthController controller =Get.put(AuthController());
+  SignInPage({super.key});
+  final AuthController controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +92,7 @@ final AuthController controller =Get.put(AuthController());
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>SignUpPage(),
+                        builder: (context) => SignUpPage(),
                       ),
                       (route) => false);
                 },
