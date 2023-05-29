@@ -1,13 +1,14 @@
+import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
-import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_up_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
-
+SignInPage({super.key});
+final AuthController controller =Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,7 @@ class SignInPage extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.search,
+              controller: controller.emailLoginController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan email anda',
@@ -61,6 +63,7 @@ class SignInPage extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.search,
+              controller: controller.passwordLoginController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan password anda',
@@ -73,12 +76,7 @@ class SignInPage extends StatelessWidget {
           42.0.height,
           WidgetButton(
             onTap: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                  (route) => false);
+              controller.login();
             },
             title: 'Masuk',
           ),
@@ -94,7 +92,7 @@ class SignInPage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SignUpPage(),
+                        builder: (context) =>SignUpPage(),
                       ),
                       (route) => false);
                 },

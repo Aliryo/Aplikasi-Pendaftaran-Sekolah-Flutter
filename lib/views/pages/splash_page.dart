@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const SignInPage(),
+            builder: (context) => SignInPage(),
           ),
           (route) => false);
     });

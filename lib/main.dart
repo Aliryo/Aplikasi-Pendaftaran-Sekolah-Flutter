@@ -2,10 +2,13 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    
+  );
   runApp(const MyApp());
 }
 
@@ -21,7 +24,8 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return Builder(builder: (context) {
-            return MaterialApp(
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Aplikasi Pendaftaran',
               theme: ThemeData(
                 primarySwatch: Colors.green,

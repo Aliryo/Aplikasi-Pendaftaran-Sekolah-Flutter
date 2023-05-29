@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "753138942967",
-    "project_id": "pendaftaransiswa-ba4cb",
-    "storage_bucket": "pendaftaransiswa-ba4cb.appspot.com"
+    "project_number": "900674485000",
+    "project_id": "aplikasi-pendaftaran-45c07",
+    "storage_bucket": "aplikasi-pendaftaran-45c07.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:753138942967:android:ae9459407a29db96e0a4f2",
+        "mobilesdk_app_id": "1:900674485000:android:0f726dc8b4ff85659b0abd",
         "android_client_info": {
-          "package_name": "com.aplikasi_pendaftaran_siswa"
+          "package_name": "com.example.aplikasi_pendaftaran_siswa"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "753138942967-m46h5k7e4kkirr3tjcphnf3a3tuglt2t.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBG2y3-LJUgAkzfanXmT5Ezl9Nhzcc5LgM"
+          "current_key": "AIzaSyDna8PwQpWXqhQBqqLKDbYAlGbGEuoomoU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "753138942967-m46h5k7e4kkirr3tjcphnf3a3tuglt2t.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

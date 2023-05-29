@@ -3,12 +3,14 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import 'home_page.dart';
+import '../../controller/auth_controller.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
 
+  final AuthController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,
+              textInputAction: TextInputAction.search,controller: controller.nameController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan nama lengkap anda',
@@ -61,7 +63,7 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,
+              textInputAction: TextInputAction.search,controller: controller.emailController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan email anda',
@@ -88,7 +90,7 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,
+              textInputAction: TextInputAction.search,controller: controller.passwordController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Masukan password anda',
@@ -115,7 +117,7 @@ class SignUpPage extends StatelessWidget {
             ),
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.search,
+              textInputAction: TextInputAction.search,controller: controller.confirmController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Konfirmasi password anda',
@@ -128,12 +130,7 @@ class SignUpPage extends StatelessWidget {
           42.0.height,
           WidgetButton(
             onTap: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                  (route) => false);
+             controller.register();
             },
             title: 'Daftar',
           ),
@@ -149,7 +146,7 @@ class SignUpPage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SignInPage(),
+                        builder: (context) => SignInPage(),
                       ),
                       (route) => false);
                 },
