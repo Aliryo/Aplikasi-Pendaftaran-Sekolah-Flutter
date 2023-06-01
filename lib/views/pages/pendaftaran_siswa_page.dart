@@ -63,17 +63,107 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 title: 'Alamat',
                 hintText: 'Masukkan alamat anak anda'),
             WidgetInputPicture(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.camera),
+                            title: const Text(
+                              "Kamera",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageCamera();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.image),
+                            title: const Text(
+                              "Galeri",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageGallery();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+              },
               title: 'Foto Diri',
               subtitle: 'Masukan foto calon siswa',
             ),
             WidgetInputPicture(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.camera),
+                            title: const Text(
+                              "Kamera",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageCamera();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.image),
+                            title: const Text(
+                              "Galeri",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageGallery();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+              },
               title: 'Foto Akta Kelahiran',
               subtitle: 'Masukan foto akta kelahiran calon siswa',
             ),
             WidgetInputPicture(
-              onTap: () {},
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.camera),
+                            title: const Text(
+                              "Kamera",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageCamera();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.image),
+                            title: const Text(
+                              "Galeri",
+                            ),
+                            onTap: () {
+                              Get.back();
+                              controller.getImageGallery();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+              },
               title: 'Foto Bukti Pembayaran',
               subtitle: 'Masukan foto bukti pembayaran',
             ),

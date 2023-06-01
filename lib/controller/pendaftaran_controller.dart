@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/pendaftaran_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PendaftaranController extends GetxController {
   final namaLengkapController = TextEditingController();
@@ -12,6 +15,29 @@ class PendaftaranController extends GetxController {
 
   var isPendaftaranLoading = false.obs;
   var pendaftaranModel = PendaftaranModel().obs;
+  var imagePath = ''.obs;
+  Rx<File> image = File('').obs;
+  final _picker = ImagePicker();
+
+  Future<void> getImageCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      image.value = File(pickedFile.path);
+      imagePath.value = pickedFile.path;
+      update();
+    } else {}
+  }
+
+  Future<void> getImageGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      image.value = File(pickedFile.path);
+      imagePath.value = pickedFile.path;
+      update();
+    } else {}
+  }
 
   Future addPendaftarBaru() async {
     try {
