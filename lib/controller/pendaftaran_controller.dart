@@ -2,6 +2,7 @@ import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/pendaftaran_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PendaftaranController extends GetxController {
   final namaLengkapController = TextEditingController();
@@ -31,6 +32,7 @@ class PendaftaranController extends GetxController {
         backgroundColor: Colors.lightGreen,
         colorText: Colors.white,
       );
+      GetStorage().write('sudahDaftar', true);
       namaLengkapController.clear();
       tanggalLahirController.clear();
       tempatLahirController.clear();

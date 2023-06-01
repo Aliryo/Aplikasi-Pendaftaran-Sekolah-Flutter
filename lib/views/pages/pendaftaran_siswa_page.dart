@@ -4,8 +4,10 @@ import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_picture.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PendaftaranSiswaBaruPage extends StatelessWidget {
   PendaftaranSiswaBaruPage({super.key});
@@ -41,9 +43,13 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
           children: [
             WidgetInputText(
-                controller: controller.namaLengkapController,
-                title: 'Nama Lengkap',
-                hintText: 'Masukkan nama lengkap anak anda'),
+              controller: controller.namaLengkapController,
+              title: 'Nama Lengkap',
+              hintText: 'Masukkan nama lengkap anak anda',
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z]+$')),
+              ],
+            ),
             WidgetInputText(
                 controller: controller.tanggalLahirController,
                 title: 'Tanggal Lahir',
@@ -74,7 +80,18 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
             16.0.height,
             WidgetButton(
               onTap: () {
-                controller.addPendaftarBaru();
+                var sudahDaftar = GetStorage().read('sudahDaftar');
+                sudahDaftar = sudahDaftar ?? false;
+                if (sudahDaftar) {
+                  Get.snackbar(
+                    'Gagal',
+                    'Anda sudah mendaftar sebelumnya',
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                } else {
+                  controller.addPendaftarBaru();
+                }
               },
               title: 'Daftar Sekarang',
             ),

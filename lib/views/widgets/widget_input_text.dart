@@ -1,5 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidgetInputText extends StatelessWidget {
@@ -13,6 +14,7 @@ class WidgetInputText extends StatelessWidget {
     this.icon,
     this.textInputType,
     this.obscureText = false,
+    this.inputFormatters,
   });
   final Widget? icon;
   final String title;
@@ -22,6 +24,7 @@ class WidgetInputText extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
   final bool obscureText;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,7 @@ class WidgetInputText extends StatelessWidget {
         ),
         8.0.height,
         TextFormField(
+          inputFormatters: inputFormatters,
           controller: controller,
           validator: validator,
           keyboardType: textInputType,
@@ -52,7 +56,7 @@ class WidgetInputText extends StatelessWidget {
               borderSide: BorderSide(color: Colors.transparent, width: 0.1.h),
               borderRadius: BorderRadius.circular(16.r),
             ),
-            errorBorder:  OutlineInputBorder(
+            errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red, width: 0.5.h),
               borderRadius: BorderRadius.circular(16.r),
             ),
