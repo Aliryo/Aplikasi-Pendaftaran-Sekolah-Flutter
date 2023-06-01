@@ -49,7 +49,7 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
               title: 'Alamat', hintText: 'Masukkan alamat anak anda'),
           WidgetInputPicture(
             onTap: () {},
-            title: 'Foto diri',
+            title: 'Foto Diri',
             subtitle: 'Masukan foto calon siswa',
           ),
           WidgetInputPicture(

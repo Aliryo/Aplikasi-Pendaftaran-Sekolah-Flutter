@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
+import 'package:aplikasi_pendaftaran_siswa/services/auth_services.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
@@ -9,7 +10,6 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -120,7 +120,7 @@ class HomePage extends StatelessWidget {
               ),
               WidgetCardHome(
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
+                  AuthService().signOut();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => SignInPage()),
