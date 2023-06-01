@@ -54,7 +54,7 @@ class AuthController extends GetxController {
           password: passwordController.text,
           name: nameController.text);
       user.value = data;
-      Get.to(() => const HomePage());
+      Get.to(() => HomePage());
       clearRegister();
     } catch (e) {
       clearRegister();
@@ -72,11 +72,11 @@ class AuthController extends GetxController {
         password: passwordLoginController.text,
       );
       user.value = data;
-      Get.to(() => const HomePage());
+      Get.to(() => HomePage());
       clearLogin();
     } catch (e) {
       clearLogin();
-      Get.snackbar("Gagal","Email atau password salah",
+      Get.snackbar("Gagal", "Email atau password salah",
           backgroundColor: Colors.red, colorText: Colors.white);
       throw Exception(e.toString());
     }

@@ -1,50 +1,60 @@
+import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
-import 'package:aplikasi_pendaftaran_siswa/services/auth_services.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
-import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/setting_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.all(6.w),
-          child: Image.asset(
-            AppImages.avatar,
-          ),
-        ),
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hallo, Jefri Nichol',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+        toolbarHeight: 80.h,
+        automaticallyImplyLeading: false,
+        title: Obx(() {
+          return Row(
+            children: [
+              Image.asset(
+                AppImages.avatar,
+                width: 60.h,
               ),
-            ),
-            Text(
-              'Selamat datang di SDN 57 Jakarta',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
+              16.0.width,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hallo, ${authController.user.value.name ??''}',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  4.0.height,
+                  Text(
+                    'Selamat datang di SDN 57 Jakarta',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            ],
+          );
+        }),
       ),
       body: ListView(
         padding: EdgeInsets.all(24.w),
@@ -120,10 +130,10 @@ class HomePage extends StatelessWidget {
               ),
               WidgetCardHome(
                 onTap: () {
-                  AuthService().signOut();
+               
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => SignInPage()),
+                      MaterialPageRoute(builder: (context) =>  SettingPage()),
                       (route) => false);
                 },
                 image: AppImages.setting,

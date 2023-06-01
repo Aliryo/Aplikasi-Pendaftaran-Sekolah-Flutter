@@ -3,6 +3,7 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_up_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,11 @@ class SignInPage extends StatelessWidget {
               WidgetInputText(
                 title: "Email",
                 hintText: "Masukan email anda",
-                validator: (value) =>
-                    value == "" ? "Email tidak boleh kosong" : null,
+                validator: (value) => !EmailValidator.validate(value!)
+                    ? "Format email tidak sesuai"
+                    : value == ""
+                        ? "Email tidak boleh kosong"
+                        : null,
                 controller: controller.emailLoginController,
               ),
               WidgetInputText(

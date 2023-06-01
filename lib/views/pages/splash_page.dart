@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(),
+              builder: (context) =>  HomePage(),
             ),
             (route) => false);
       }
