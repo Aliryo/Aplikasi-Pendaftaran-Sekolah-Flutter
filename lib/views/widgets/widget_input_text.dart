@@ -3,14 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidgetInputText extends StatelessWidget {
-  const WidgetInputText(
-      {super.key,
-      required this.title,
-      required this.hintText,
-      this.controller});
+  const WidgetInputText({
+    super.key,
+    required this.title,
+    required this.hintText,
+    this.validator,
+    this.controller,
+    this.textInputAction,
+    this.icon,
+    this.textInputType,
+    this.obscureText = false,
+  });
+  final Widget? icon;
   final String title;
   final String hintText;
+  final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final TextInputAction? textInputAction;
+  final TextInputType? textInputType;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +36,35 @@ class WidgetInputText extends StatelessWidget {
           ),
         ),
         8.0.height,
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-          decoration: BoxDecoration(
-            color: Colors.blue[50],
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-          child: TextFormField(
-            controller: controller,
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
-              hintStyle: const TextStyle(
-                color: Colors.grey,
-              ),
+        TextFormField(
+          controller: controller,
+          validator: validator,
+          keyboardType: textInputType,
+          textInputAction: textInputAction,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            suffixIcon: icon,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent, width: 0.1.h),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent, width: 0.1.h),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            errorBorder:  OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 0.5.h),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.green, width: 1.h),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            fillColor: Colors.blue[50],
+            filled: true,
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              color: Colors.grey,
             ),
           ),
         ),

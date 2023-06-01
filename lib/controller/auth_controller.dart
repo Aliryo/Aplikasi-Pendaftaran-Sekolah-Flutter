@@ -16,7 +16,35 @@ class AuthController extends GetxController {
 
   var isRegisterLoading = false.obs;
   var isLoginLoading = false.obs;
+  var hidePasswordRegister = true.obs;
+  var hideConfirmRegister = true.obs;
+  var hidePasswordLogin = true.obs;
   var user = UserModel().obs;
+  final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
+
+  void changeHidePasswordRegister() =>
+      hidePasswordRegister.value = !hidePasswordRegister.value;
+
+  void changeHideConfirmRegister() =>
+      hideConfirmRegister.value = !hideConfirmRegister.value;
+
+  void changeHidePasswordLogin() =>
+      hidePasswordLogin.value = !hidePasswordLogin.value;
+
+  void clearRegister() {
+    isRegisterLoading.value = false;
+    emailController.clear();
+    passwordController.clear();
+    nameController.clear();
+    confirmController.clear();
+  }
+
+  void clearLogin() {
+    isLoginLoading.value = false;
+    emailLoginController.clear();
+    passwordLoginController.clear();
+  }
 
   Future<void> register() async {
     try {
@@ -27,9 +55,11 @@ class AuthController extends GetxController {
           name: nameController.text);
       user.value = data;
       Get.to(() => const HomePage());
-      isRegisterLoading.value = false;
+      clearRegister();
     } catch (e) {
-      isRegisterLoading.value = false;
+      clearRegister();
+      Get.snackbar("Gagal", "Email sudah terdaftar",
+          backgroundColor: Colors.redAccent, colorText: Colors.white);
       throw Exception(e.toString());
     }
   }
@@ -43,17 +73,19 @@ class AuthController extends GetxController {
       );
       user.value = data;
       Get.to(() => const HomePage());
-      isLoginLoading.value = false;
+      clearLogin();
     } catch (e) {
-      isLoginLoading.value = false;
-
+      clearLogin();
+      Get.snackbar("Gagal","Email atau password salah",
+          backgroundColor: Colors.red, colorText: Colors.white);
       throw Exception(e.toString());
     }
   }
-   void getCurrentUser(String id) async {
+
+  void getCurrentUser(String id) async {
     try {
-     var data = await UserService().getUser(id);
-   user.value = data;
+      var data = await UserService().getUser(id);
+      user.value = data;
     } catch (e) {
       throw Exception(e.toString());
     }
