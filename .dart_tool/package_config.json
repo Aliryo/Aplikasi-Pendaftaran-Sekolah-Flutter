@@ -86,6 +86,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "ffi",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/ffi-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "file",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/file-6.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "firebase_auth",
       "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/firebase_auth-4.3.0",
       "packageUri": "lib/",
@@ -162,6 +174,12 @@
       "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/get-4.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "get_storage",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/get_storage-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "http",
@@ -248,10 +266,58 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider-2.0.15",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "path_provider_foundation",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/platform-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "plugin_platform_interface",
       "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "process",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/process-4.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "sky_engine",
@@ -308,13 +374,25 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "win32",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/win32-4.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/xdg_directories-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "aplikasi_pendaftaran_siswa",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-01T14:14:00.147450Z",
+  "generated": "2023-06-01T14:49:10.864911Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }
