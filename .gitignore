@@ -59,13 +59,3 @@ android/.gradle/buildOutputCleanup/cache.properties
 android/.gradle/buildOutputCleanup/outputFiles.bin
 android/.gradle/file-system.probe
 android/.gradle/vcs-1/gc.properties
-.dart_tool/package_config.json
-.dart_tool/package_config_subset
-.dart_tool/version
-.DS_Store
-android/.DS_Store
-android/app/build.gradle
-android/app/google-services.json
-android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
-android/local.properties
-pubspec.lock
