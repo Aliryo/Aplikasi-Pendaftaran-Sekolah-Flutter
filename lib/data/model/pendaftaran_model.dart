@@ -12,8 +12,8 @@ class PendaftaranModel {
   String? tanggalLahir;
   String? tempatLahir;
   String? alamat;
-  String? pembayaran;
-  String? status;
+  bool? pembayaran;
+  bool? status;
   String? descStatus;
 
   PendaftaranModel({
@@ -33,14 +33,15 @@ class PendaftaranModel {
     String? tanggalLahir,
     String? tempatLahir,
     String? alamat,
-    String? pembayaran,
-    String? status,
+    bool? pembayaran,
+    bool? status,
     String? descStatus,
   }) =>
       PendaftaranModel(
         id: id ?? this.id,
         namaLengkap: namaLengkap ?? this.namaLengkap,
         tanggalLahir: tanggalLahir ?? this.tanggalLahir,
+        tempatLahir: tempatLahir ?? this.tempatLahir,
         alamat: alamat ?? this.alamat,
         pembayaran: pembayaran ?? this.pembayaran,
         status: status ?? this.status,
@@ -52,6 +53,7 @@ class PendaftaranModel {
         id: json["id"],
         namaLengkap: json["nama_lengkap"],
         tanggalLahir: json["tanggal_lahir"],
+        tempatLahir: json["tempat_lahir"],
         alamat: json["alamat"],
         pembayaran: json["pembayaran"],
         status: json["status"],
@@ -62,6 +64,7 @@ class PendaftaranModel {
         "id": id,
         "nama_lengkap": namaLengkap,
         "tanggal_lahir": tanggalLahir,
+        "tempat_lahir": tempatLahir,
         "alamat": alamat,
         "pembayaran": pembayaran,
         "status": status,

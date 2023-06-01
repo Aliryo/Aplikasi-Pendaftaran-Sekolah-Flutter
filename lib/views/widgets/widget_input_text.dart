@@ -4,9 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidgetInputText extends StatelessWidget {
   const WidgetInputText(
-      {super.key, required this.title, required this.hintText});
+      {super.key,
+      required this.title,
+      required this.hintText,
+      this.controller});
   final String title;
   final String hintText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,7 @@ class WidgetInputText extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
           ),
           child: TextFormField(
+            controller: controller,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.search,
             decoration: InputDecoration(
