@@ -5,9 +5,11 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.d
 import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -117,7 +119,13 @@ class HomePage extends StatelessWidget {
                 title: 'Hubungi Kami',
               ),
               WidgetCardHome(
-                onTap: () {},
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignInPage()),
+                      (route) => false);
+                },
                 image: AppImages.setting,
                 title: 'Pengaturan',
               ),
