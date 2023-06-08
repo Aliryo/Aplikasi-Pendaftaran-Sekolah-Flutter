@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PendaftaranService {
   String _uid = '';
@@ -10,6 +14,7 @@ class PendaftaranService {
     }
   }
   final _pendaftaran = FirebaseFirestore.instance.collection('pendaftaran');
+  final _storage = FirebaseStorage.instance;
 
   Future addPendaftaran({
     required String namaLengkap,
@@ -30,5 +35,18 @@ class PendaftaranService {
       'descStatus': descStatus,
       'userId': _uid,
     });
+  }
+
+  Future<String> uploadFotoDiri(XFile imageFile, String title) async {
+    try {
+      final Reference storageRef =
+          _storage.ref().child('foto_diri').child('$_uid+$title.jpg');
+      final TaskSnapshot snapshot =
+          await storageRef.putFile(File(imageFile.path));
+      final String downloadURL = await snapshot.ref.getDownloadURL();
+      return downloadURL;
+    } catch (e) {
+      return e.toString();
+    }
   }
 }

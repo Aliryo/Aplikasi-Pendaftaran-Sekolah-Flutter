@@ -17,26 +17,17 @@ class PendaftaranController extends GetxController {
   var pendaftaranModel = PendaftaranModel().obs;
   var imagePath = ''.obs;
   Rx<File> image = File('').obs;
+  RxString documentImageUrl = ''.obs;
   final _picker = ImagePicker();
 
-  Future<void> getImageCamera() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-
-    if (pickedFile != null) {
-      image.value = File(pickedFile.path);
-      imagePath.value = pickedFile.path;
-      update();
-    } else {}
-  }
-
-  Future<void> getImageGallery() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      image.value = File(pickedFile.path);
-      imagePath.value = pickedFile.path;
-      update();
-    } else {}
+  Future<void> pickFotoDiri(String title) async {
+    final XFile? imageFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (imageFile != null) {
+      final String downloadURL =
+          await PendaftaranService().uploadFotoDiri(imageFile, title);
+      documentImageUrl.value = downloadURL;
+    }
   }
 
   Future addPendaftarBaru() async {
