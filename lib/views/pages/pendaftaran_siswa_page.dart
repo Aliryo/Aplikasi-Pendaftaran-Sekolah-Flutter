@@ -62,27 +62,57 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 controller: controller.alamatController,
                 title: 'Alamat',
                 hintText: 'Masukkan alamat anak anda'),
-            WidgetInputPicture(
-              onTap: () {
-                controller.pickFotoDiri('fotodiri');
-              },
-              title: 'Foto Diri',
-              subtitle: 'Masukan foto calon siswa',
-            ),
-            WidgetInputPicture(
-              onTap: () {
-                controller.pickFotoDiri('aktakelahiran');
-              },
-              title: 'Foto Akta Kelahiran',
-              subtitle: 'Masukan foto akta kelahiran calon siswa',
-            ),
-            WidgetInputPicture(
-              onTap: () {
-                controller.pickFotoDiri('pembayaran');
-              },
-              title: 'Foto Bukti Pembayaran',
-              subtitle: 'Masukan foto bukti pembayaran',
-            ),
+            (controller.fotoDiriImageUrl.value != '')
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: Image.network(
+                      controller.fotoDiriImageUrl.value,
+                      height: 160.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : WidgetInputPicture(
+                    onTap: () {
+                      controller.pickFotoDiri();
+                    },
+                    title: 'Foto Diri',
+                    subtitle: 'Masukan foto calon siswa',
+                  ),
+            (controller.fotoAktaKelahiranImageUrl.value != '')
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: Image.network(
+                      controller.fotoAktaKelahiranImageUrl.value,
+                      height: 160.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : WidgetInputPicture(
+                    onTap: () {
+                      controller.pickFotoAktaKelahiran();
+                    },
+                    title: 'Foto Akta Kelahiran',
+                    subtitle: 'Masukan foto akta kelahiran calon siswa',
+                  ),
+            (controller.fotoBuktiPembayaranImageUrl.value != '')
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: Image.network(
+                      controller.fotoBuktiPembayaranImageUrl.value,
+                      height: 160.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : WidgetInputPicture(
+                    onTap: () {
+                      controller.pickFotoBuktiPembayaran();
+                    },
+                    title: 'Foto Bukti Pembayaran',
+                    subtitle: 'Masukan foto bukti pembayaran',
+                  ),
             16.0.height,
             WidgetButton(
               onTap: () {
