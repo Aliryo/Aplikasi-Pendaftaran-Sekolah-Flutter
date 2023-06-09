@@ -82,7 +82,7 @@ class SettingPage extends StatelessWidget {
                 ),
                 48.0.height,
                 cardSetting(
-                    icon: Icon(Icons.health_and_safety_rounded),
+                    icon: const Icon(Icons.health_and_safety_rounded),
                     title: "Ubah Password")
               ],
             ),
