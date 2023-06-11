@@ -1,13 +1,15 @@
+import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class DetailCalonSiswaPage extends StatelessWidget {
-  const DetailCalonSiswaPage({super.key});
-  final bool isAdmin = true;
+  DetailCalonSiswaPage({super.key});
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   ),
                 )
               ]),
-              if (isAdmin)
+              if (authController.user.value.role == 'admin')
                 const TableRow(children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),
@@ -100,8 +102,8 @@ class DetailCalonSiswaPage extends StatelessWidget {
             ],
             border: TableBorder.all(width: 0, color: Colors.transparent),
           ),
-          isAdmin ? 16.0.height : 32.0.height,
-          isAdmin
+          authController.user.value.role == 'admin' ? 16.0.height : 32.0.height,
+          authController.user.value.role == 'admin'
               ? Container(
                   width: double.infinity,
                   height: 280.h,
@@ -112,12 +114,14 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   ),
                 )
               : const Text(
-                  'Selamat anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDN 1 Bandung',
+                  'Selamat anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
-          isAdmin ? 32.0.height : const SizedBox(),
-          isAdmin
+          authController.user.value.role == 'admin'
+              ? 32.0.height
+              : const SizedBox(),
+          authController.user.value.role == 'admin'
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

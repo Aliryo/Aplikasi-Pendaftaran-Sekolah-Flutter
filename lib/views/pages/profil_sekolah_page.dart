@@ -15,14 +15,14 @@ class ProfilSekolahPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Profile Sekolah',
+              'Profil Sekolah',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
             Text(
-              'Selamat datang di SDN 57 Jakarta',
+              'Selamat datang di SDIP Baitussalam',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -41,7 +41,7 @@ class ProfilSekolahPage extends StatelessWidget {
           16.0.height,
           const Center(
             child: Text(
-              'SD Negeri 1 Bandung',
+              'SDIP Baitussalam Kuningan',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
@@ -51,7 +51,7 @@ class ProfilSekolahPage extends StatelessWidget {
           4.0.height,
           const Center(
             child: Text(
-              'Jln, raya sambiroto no 58, kec tembalang, semarang kota, jawa tengah. 54472',
+              'Jl. Blok Cikedung, Kelurahan Cirendang, Kecamatan Kuningan, Kabupaten Kuningan',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -81,7 +81,7 @@ class ProfilSekolahPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    'Negeri',
+                    'Swasta',
                     textAlign: TextAlign.right,
                   ),
                 )
@@ -118,30 +118,25 @@ class ProfilSekolahPage extends StatelessWidget {
           32.0.height,
           CarouselSlider(
             items: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: Image.asset(
-                  AppImages.profile1,
-                  width: 360.w,
-                  height: 214.h,
-                  fit: BoxFit.cover,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(
+                    AppImages.profile1,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],
             options: CarouselOptions(
               height: 214.h,
               viewportFraction: 1,
-              autoPlay: true,
+              autoPlay: false,
               initialPage: 0,
               onPageChanged: (index, reason) {},
             ),
-          ),
-          4.0.height,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              indicator(1),
-            ],
           ),
           32.0.height,
           const Text(
@@ -152,10 +147,7 @@ class ProfilSekolahPage extends StatelessWidget {
           ),
           8.0.height,
           const Text(
-            'Untuk mewujudkan tujuan pendidikan di Indonesia di jenjang pendidikan dasar, '
-            'maka SD Negeri Baluwarti berkeinginan mewujudkannya dengan disesuaikan visi sekolah yaitu :\n'
-            '“Terciptanya sekolah ramah anak, unggul dalam prestasi, berkarakter, berakar pada budaya bangsa dan '
-            'berwawasan lingkungan berdasarkan ketakwaan dan ilmu pengetahuan”',
+            'Visi SDIP BAITUSSALAM adalah “Mewujudkan generasi Qur’ani yang berkwalitas, unggul dan berdaya guna”',
             textAlign: TextAlign.justify,
             style: TextStyle(fontSize: 12),
           ),
@@ -168,25 +160,19 @@ class ProfilSekolahPage extends StatelessWidget {
           ),
           8.0.height,
           const Text(
-            'Untuk mewujudkan tujuan pendidikan di Indonesia di jenjang pendidikan dasar, '
-            'maka SD Negeri Baluwarti berkeinginan mewujudkannya dengan disesuaikan visi sekolah yaitu :\n'
-            '“Terciptanya sekolah ramah anak, unggul dalam prestasi, berkarakter, berakar pada budaya bangsa dan '
-            'berwawasan lingkungan berdasarkan ketakwaan dan ilmu pengetahuan”',
+            '- Menumbuhkan budaya islam dilingkungan sekolah'
+            '\n\n- Melaksanakan pendidikan sekolah dasar islam secara menyeluruh (kaffah) untuk membangun akhlakul karimah, siswa, dan civitas Akademika'
+            '\n\n- Menciptakan pembelajaran yang Aktif, Inovatif kreatif, dan menyenangkan (PAIKEM)'
+            '\n\n- Membiasakan membaca dan memahami Al Qur’an dan Hadits'
+            '\n\n- Menciptakan lingkungan sekolah berbasis multimedia'
+            '\n\n- Mengembangkan dan menyalurkan bakat, minat, dan potensi siswa secara maksimal melalui kegiatan ekstrakurikuler'
+            '\n\n- Mengarahkan peserta didik menuju Pribadi yang Mandiri dan Agamis'
+            '\n\n- Menjadi sekolah unggulan di Kabupaten Kuningan dan sekitarnya',
             textAlign: TextAlign.justify,
             style: TextStyle(fontSize: 12),
           ),
         ],
       ),
-    );
-  }
-
-  Widget indicator(int index) {
-    return Container(
-      width: 40.w,
-      height: 8.h,
-      margin: EdgeInsets.symmetric(horizontal: 2.w),
-      decoration: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(3.w)),
     );
   }
 }

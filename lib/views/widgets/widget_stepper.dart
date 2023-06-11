@@ -67,6 +67,26 @@ class WidgetStepper extends StatelessWidget {
             ),
           ),
         ),
+        Container(
+          width: 30.w,
+          height: 3.w,
+          color: (currentStep >= 3) ? Colors.green : Colors.grey,
+        ),
+        Container(
+          width: (currentStep == 3) ? 40.w : 32.w,
+          height: (currentStep == 3) ? 40.w : 32.w,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: (currentStep >= 3) ? Colors.green : Colors.grey),
+          child: Center(
+            child: Text(
+              "4",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: (currentStep == 0) ? 14.sp : 12.sp),
+            ),
+          ),
+        ),
       ],
     );
   }

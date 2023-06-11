@@ -9,7 +9,7 @@ class JadwalPendaftaranPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int currentStep = 2;
+    int currentStep = 3;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -29,8 +29,10 @@ class JadwalPendaftaranPage extends StatelessWidget {
             currentStep == 0
                 ? 'Pendaftaran Administrasi'
                 : currentStep == 1
-                    ? 'Daftar Ulang'
-                    : 'Awal masuk ajaran baru',
+                    ? 'Pengumuman Pendaftaran'
+                    : currentStep == 2
+                        ? 'Daftar Ulang Siswa Baru'
+                        : 'Jadwal Masuk Ajaran Baru',
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -42,7 +44,9 @@ class JadwalPendaftaranPage extends StatelessWidget {
                 ? AppImages.step1
                 : currentStep == 1
                     ? AppImages.step2
-                    : AppImages.step3,
+                    : currentStep == 2
+                        ? AppImages.step3
+                        : AppImages.step3,
           ),
           32.0.height,
           currentStep == 0
@@ -57,11 +61,17 @@ class JadwalPendaftaranPage extends StatelessWidget {
                       '\n\n1. Calon peserta didik berusia 7 tahun, dibuktikan dengan akta kelahiran '
                       '\n\n2. Mengisi formulir pendaftaran sesuai jadwal pendaftaran,',
                     )
-                  : const Text(
-                      'Pendaftaran dilakukan secara online, dimulai tanggal 20 april 2023 sampai 05 juni 2023, dengan persyaratan administrasi sebagai berikut :'
-                      '\n\n1. Calon peserta didik berusia 7 tahun, dibuktikan dengan akta kelahiran.'
-                      '\n\n2. Mengisi formulir pendaftaran sesuai jadwal pendaftaran.',
-                    ),
+                  : currentStep == 2
+                      ? const Text(
+                          'Pendaftaran dilakukan secara online, dimulai tanggal 20 april 2023 sampai 05 juni 2023, dengan persyaratan administrasi sebagai berikut :'
+                          '\n\n1. Calon peserta didik berusia 7 tahun, dibuktikan dengan akta kelahiran.'
+                          '\n\n2. Mengisi formulir pendaftaran sesuai jadwal pendaftaran.',
+                        )
+                      : const Text(
+                          'Pendaftaran dilakukan secara online, dimulai tanggal 20 april 2023 sampai 05 juni 2023, dengan persyaratan administrasi sebagai berikut :'
+                          '\n\n1. Calon peserta didik berusia 7 tahun, dibuktikan dengan akta kelahiran.'
+                          '\n\n2. Mengisi formulir pendaftaran sesuai jadwal pendaftaran.',
+                        ),
         ],
       ),
     );

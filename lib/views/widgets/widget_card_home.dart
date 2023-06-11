@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WidgetCardHome extends StatelessWidget {
-  const WidgetCardHome(
-      {super.key, required this.image, required this.title, this.onTap});
+  const WidgetCardHome({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.width,
+    this.onTap,
+  });
   final String image;
+  final double width;
   final String title;
   final Function()? onTap;
 
@@ -18,7 +24,7 @@ class WidgetCardHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
         ),
         child: SizedBox(
-          width: 112.w,
+          width: width,
           height: 112.h,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

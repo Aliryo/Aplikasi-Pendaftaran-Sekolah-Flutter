@@ -23,6 +23,8 @@ class WidgetDaftarCalon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        color: Colors.transparent,
+        width: double.infinity,
         margin: EdgeInsets.only(bottom: 16.h),
         child: Row(
           children: [

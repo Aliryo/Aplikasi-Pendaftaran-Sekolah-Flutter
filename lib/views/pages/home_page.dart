@@ -3,6 +3,7 @@ import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_admin_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${authController.user.value.name ?? ''}',
+                    'Halo, ${authController.user.value.name ?? ''}',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
@@ -44,9 +45,9 @@ class HomePage extends StatelessWidget {
                   ),
                   4.0.height,
                   Text(
-                    'Selamat datang di SDN 57 Jakarta',
+                    'Selamat datang di SDIP Baitussalam Kuningan',
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -67,76 +68,154 @@ class HomePage extends StatelessWidget {
             ),
           ),
           16.0.height,
-          Wrap(
-            runSpacing: 16.h,
-            spacing: 8.w,
-            children: [
-              WidgetCardHome(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PendaftaranSiswaBaruPage(),
-                    ),
-                  );
-                },
-                image: AppImages.register,
-                title: 'Pendaftaran\nSiswa baru',
-              ),
-              WidgetCardHome(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DaftarCalonSiswaPage(),
-                    ),
-                  );
-                },
-                image: AppImages.student,
-                title: 'Daftar\nCalon Siswa',
-              ),
-              WidgetCardHome(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const JadwalPendaftaranPage(),
-                    ),
-                  );
-                },
-                image: AppImages.schedule,
-                title: 'Jadwal\nPendaftaran',
-              ),
-              WidgetCardHome(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfilSekolahPage(),
-                    ),
-                  );
-                },
-                image: AppImages.school,
-                title: 'Profil Sekolah',
-              ),
-              WidgetCardHome(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => const ContactUsAlert());
-                },
-                image: AppImages.contactUs,
-                title: 'Hubungi Kami',
-              ),
-              WidgetCardHome(
-                onTap: () {
-                  Get.to(() => SettingPage());
-                },
-                image: AppImages.setting,
-                title: 'Pengaturan',
-              ),
-            ],
-          ),
+          authController.user.value.role == 'member'
+              ? Center(
+                  child: Wrap(
+                    runSpacing: 16.h,
+                    spacing: 8.w,
+                    children: [
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PendaftaranSiswaBaruPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.register,
+                        title: 'Pendaftaran\nSiswa baru',
+                      ),
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const DaftarCalonSiswaPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.student,
+                        title: 'Daftar\nCalon Siswa',
+                      ),
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const JadwalPendaftaranPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.schedule,
+                        title: 'Jadwal\nPendaftaran',
+                      ),
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilSekolahPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.school,
+                        title: 'Profil Sekolah',
+                      ),
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const ContactUsAlert());
+                        },
+                        image: AppImages.contactUs,
+                        title: 'Hubungi Kami',
+                      ),
+                      WidgetCardHome(
+                        width: 112.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.setting,
+                        title: 'Pengaturan',
+                      ),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Wrap(
+                    runSpacing: 16.h,
+                    spacing: 8.w,
+                    children: [
+                      WidgetCardHome(
+                        width: 160.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const DaftarCalonSiswaPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.student,
+                        title: 'Daftar\nCalon Siswa',
+                      ),
+                      WidgetCardHome(
+                        width: 160.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const JadwalPendaftaranAdminPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.schedule,
+                        title: 'Jadwal\nPendaftaran',
+                      ),
+                      WidgetCardHome(
+                        width: 160.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilSekolahPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.school,
+                        title: 'Profil Sekolah',
+                      ),
+                      WidgetCardHome(
+                        width: 160.w,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingPage(),
+                            ),
+                          );
+                        },
+                        image: AppImages.setting,
+                        title: 'Pengaturan',
+                      ),
+                    ],
+                  ),
+                ),
           16.0.height,
           const Text(
             'Kegiatan Sekolah',
@@ -148,13 +227,15 @@ class HomePage extends StatelessWidget {
           16.0.height,
           CarouselSlider(
             items: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: Image.asset(
-                  AppImages.kegiatan,
-                  width: 360.w,
-                  height: 200.h,
-                  fit: BoxFit.cover,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(
+                    AppImages.kegiatan,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],

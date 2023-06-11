@@ -26,7 +26,7 @@ class DaftarCalonSiswaPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DetailCalonSiswaPage(),
+                  builder: (context) => DetailCalonSiswaPage(),
                 ),
               );
             },
@@ -41,7 +41,7 @@ class DaftarCalonSiswaPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DetailCalonSiswaPage(),
+                  builder: (context) => DetailCalonSiswaPage(),
                 ),
               );
             },
@@ -56,7 +56,7 @@ class DaftarCalonSiswaPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DetailCalonSiswaPage(),
+                  builder: (context) => DetailCalonSiswaPage(),
                 ),
               );
             },
