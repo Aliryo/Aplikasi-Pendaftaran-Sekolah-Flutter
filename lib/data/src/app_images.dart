@@ -19,4 +19,5 @@ class AppImages {
 
   static const String camera = "assets/camera.png";
   static const String bocil = "assets/bocil.png";
+  static const String briIcon = "assets/bri.png";
 }

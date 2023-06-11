@@ -12,9 +12,13 @@ class PendaftaranModel {
   String? tanggalLahir;
   String? tempatLahir;
   String? alamat;
+  String? selfieUrl;
+  String? aktaUrl;
+  String? pembayaranUrl;
   bool? pembayaran;
   bool? status;
   String? descStatus;
+  String? uid;
 
   PendaftaranModel({
     this.id,
@@ -22,9 +26,13 @@ class PendaftaranModel {
     this.tanggalLahir,
     this.tempatLahir,
     this.alamat,
+    this.selfieUrl,
+    this.aktaUrl,
+    this.pembayaranUrl,
     this.pembayaran,
     this.status,
     this.descStatus,
+    this.uid,
   });
 
   PendaftaranModel copyWith({
@@ -33,6 +41,9 @@ class PendaftaranModel {
     String? tanggalLahir,
     String? tempatLahir,
     String? alamat,
+    String? selfieUrl,
+    String? aktaUrl,
+    String? pembayaranUrl,
     bool? pembayaran,
     bool? status,
     String? descStatus,
@@ -43,6 +54,9 @@ class PendaftaranModel {
         tanggalLahir: tanggalLahir ?? this.tanggalLahir,
         tempatLahir: tempatLahir ?? this.tempatLahir,
         alamat: alamat ?? this.alamat,
+        selfieUrl: selfieUrl ?? this.selfieUrl,
+        aktaUrl: aktaUrl ?? this.aktaUrl,
+        pembayaranUrl: pembayaranUrl ?? this.pembayaranUrl,
         pembayaran: pembayaran ?? this.pembayaran,
         status: status ?? this.status,
         descStatus: descStatus ?? this.descStatus,
@@ -55,9 +69,13 @@ class PendaftaranModel {
         tanggalLahir: json["tanggal_lahir"],
         tempatLahir: json["tempat_lahir"],
         alamat: json["alamat"],
+        selfieUrl: json['foto_diri'],
+        aktaUrl: json['akta_kelahiran'],
+        pembayaranUrl: json['bukti_pembayaran'],
         pembayaran: json["pembayaran"],
         status: json["status"],
         descStatus: json["descStatus"],
+        uid: json["userId"]
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,8 +84,12 @@ class PendaftaranModel {
         "tanggal_lahir": tanggalLahir,
         "tempat_lahir": tempatLahir,
         "alamat": alamat,
+        'foto_diri': selfieUrl,
+        "akta_kelahiran": aktaUrl,
+        'bukti_pembayaran': pembayaranUrl,
         "pembayaran": pembayaran,
         "status": status,
         "descStatus": descStatus,
+        'userId':uid
       };
 }

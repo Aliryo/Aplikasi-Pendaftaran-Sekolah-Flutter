@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
 
 class PendaftaranService {
   String _uid = '';
@@ -21,6 +21,9 @@ class PendaftaranService {
     required String tanggalLahir,
     required String tempatLahir,
     required String alamat,
+    required String fotoDiri,
+    required String aktaKelahiran,
+    required String buktiPembayaran,
     required bool pembayaran,
     required bool status,
     required String descStatus,
@@ -30,6 +33,9 @@ class PendaftaranService {
       'tanggal_lahir': tanggalLahir,
       'tempat_lahir': tempatLahir,
       'alamat': alamat,
+      'foto_diri': fotoDiri,
+      'akta_kelahiran': aktaKelahiran,
+      'bukti_pembayaran': buktiPembayaran,
       'pembayaran': pembayaran,
       'status': status,
       'descStatus': descStatus,
@@ -37,16 +43,21 @@ class PendaftaranService {
     });
   }
 
-  Future<String> uploadFotoDiri(XFile imageFile, String title) async {
+  Future<String> uploadFotoDiri(File imageFile, String title) async {
     try {
       final Reference storageRef =
           _storage.ref().child('foto_diri').child('$_uid+$title.jpg');
-      final TaskSnapshot snapshot =
-          await storageRef.putFile(File(imageFile.path));
+      final TaskSnapshot snapshot = await storageRef.putFile(imageFile);
       final String downloadURL = await snapshot.ref.getDownloadURL();
       return downloadURL;
     } catch (e) {
       return e.toString();
     }
+  }
+
+  Future updateJadwal(PendaftaranModel pendaftaranModel, String buktiUrl) {
+    return _pendaftaran
+        .doc(pendaftaranModel.id)
+        .update({'bukti_pembayaran': buktiUrl});
   }
 }

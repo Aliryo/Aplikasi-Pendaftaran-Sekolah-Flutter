@@ -4,7 +4,7 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran_page.dart';
-import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran_siswa_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/setting_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${authController.user.value.name ??''}',
+                    'Hallo, ${authController.user.value.name ?? ''}',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
@@ -130,11 +130,7 @@ class HomePage extends StatelessWidget {
               ),
               WidgetCardHome(
                 onTap: () {
-               
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  SettingPage()),
-                      (route) => false);
+                  Get.to(() => SettingPage());
                 },
                 image: AppImages.setting,
                 title: 'Pengaturan',
