@@ -1,6 +1,7 @@
 import 'package:aplikasi_pendaftaran_siswa/data/model/user_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/auth_services.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,6 +80,16 @@ class AuthController extends GetxController {
       Get.snackbar("Gagal", "Email atau password salah",
           backgroundColor: Colors.red, colorText: Colors.white);
       throw Exception(e.toString());
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await AuthService().signOut();
+      Get.off(()=>SignInPage());
+    } catch (e) {
+      Get.snackbar("Gagal", "Gagal keluar",
+          backgroundColor: Colors.red, colorText: Colors.white);
     }
   }
 

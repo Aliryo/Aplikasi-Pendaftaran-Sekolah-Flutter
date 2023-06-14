@@ -13,22 +13,27 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget cardSetting({
+      Function()? onTap,
       required Widget icon,
       required String title,
     }) {
-      return Row(
-        children: [
-          icon,
-          8.0.width,
-          Expanded(
-            child: Text(title,
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
-          ),
-          Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 18.w,
-          )
-        ],
+      return GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            icon,
+            8.0.width,
+            Expanded(
+              child: Text(title,
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18.w,
+            )
+          ],
+        ),
       );
     }
 
@@ -92,8 +97,7 @@ class SettingPage extends StatelessWidget {
                       ),
                       4.0.height,
                       Text(
-                        (authController.user.value.role ?? '').capitalize ??
-                            "",
+                        (authController.user.value.role ?? '').capitalize ?? "",
                         style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -112,22 +116,14 @@ class SettingPage extends StatelessWidget {
               ),
               24.0.height,
               cardSetting(
-                  icon: const Icon(Icons.health_and_safety_rounded),
+                  icon: const Icon(Icons.password, color: Colors.green,),
                   title: "Ubah Password"),
+            
               16.0.height,
               cardSetting(
-                  icon: const Icon(Icons.health_and_safety_rounded),
-                  title: "Ubah Password"),
-              16.0.height,
-              cardSetting(
-                  icon: const Icon(Icons.handshake),
-                  title: "Ubah Password"),
-              16.0.height,
-              cardSetting(
-                  icon: const Icon(Icons.health_and_safety_rounded),
-                  title: "Ubah Password"),
-              16.0.height,
-              cardSetting(
+                onTap: () {
+                  authController.logout();
+                },
                   icon: const Icon(
                     Icons.logout,
                     color: Colors.green,

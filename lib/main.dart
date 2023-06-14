@@ -1,4 +1,4 @@
-import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pembayaran_page.dart';
+
 import 'package:aplikasi_pendaftaran_siswa/views/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/pendaftaran_service.dart';
-import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pembayaran_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,16 +16,14 @@ class PendaftaranController extends GetxController {
   var isPendaftaranLoading = false.obs;
   var pendaftaranModel = PendaftaranModel().obs;
   var imagePath = ''.obs;
-  Rx<File> image = File('').obs;
 
   Rx<File> fotoDiri = File('').obs;
   Rx<File> aktaKelahiran = File('').obs;
-  var isValid = false.obs;
-
   Rx<File> buktiPembayaran = File('').obs;
-  RxString fotoDiriImageUrl = ''.obs;
-  RxString fotoAktaKelahiranImageUrl = ''.obs;
-  RxString fotoBuktiPembayaranImageUrl = ''.obs;
+
+  var pendaftaraninValid = true.obs;
+
+  var penbayaraninValid = true.obs;
   // final _picker = ImagePicker();
 
   Future camera({required String type, bool fromGalery = false}) async {
@@ -44,39 +41,46 @@ class PendaftaranController extends GetxController {
         buktiPembayaran.value = File(pickedImage.path);
       }
     }
+    validatePendaftaran();
+    validatePembayaran();
   }
 
-  // Future<void> upladFotoDiri() async {
-  //   final XFile? imageFile =
-  //       await _picker.pickImage(source: ImageSource.camera);
-  //   if (imageFile != null) {
-  //     final String downloadURL =
-  //         await PendaftaranService().uploadFotoDiri(imageFile, 'fotodiri');
-  //     fotoDiriImageUrl.value = downloadURL;
-  //   }
-  // }
+  onNameChange(String value) {
+    validatePendaftaran();
+  }
 
-  // Future<void> pickFotoAktaKelahiran() async {
-  //   final XFile? imageFile =
-  //       await _picker.pickImage(source: ImageSource.camera);
-  //   if (imageFile != null) {
-  //     final String downloadURL =
-  //         await PendaftaranService().uploadFotoDiri(imageFile, 'aktakelahiran');
-  //     fotoAktaKelahiranImageUrl.value = downloadURL;
-  //   }
-  // }
+  onTanggalChange(String value) {
+    validatePendaftaran();
+  }
 
-  // Future<void> pickFotoBuktiPembayaran() async {
-  //   final XFile? imageFile =
-  //       await _picker.pickImage(source: ImageSource.camera);
-  //   if (imageFile != null) {
-  //     final String downloadURL = await PendaftaranService()
-  //         .uploadFotoDiri(imageFile, 'buktipembayaran');
-  //     fotoBuktiPembayaranImageUrl.value = downloadURL;
-  //   }
-  // }
+  onTempatChange(String value) {
+    validatePendaftaran();
+  }
 
-  validatePendaftaran() {}
+  onAlamatChange(String value) {
+    validatePendaftaran();
+  }
+
+  validatePendaftaran() {
+    if (namaLengkapController.text != "" &&
+        tanggalLahirController.text != "" &&
+        tempatLahirController.text != "" &&
+        alamatController.text != '' &&
+        fotoDiri.value.path.isNotEmpty &&
+        aktaKelahiran.value.path.isNotEmpty) {
+      pendaftaraninValid.value = false;
+    } else {
+      pendaftaraninValid.value = true;
+    }
+  }
+
+  validatePembayaran() {
+    if (buktiPembayaran.value.path.isNotEmpty) {
+      penbayaraninValid.value = false;
+    } else {
+      penbayaraninValid.value = true;
+    }
+  }
 
   Future addPendaftarBaru() async {
     try {
@@ -88,6 +92,8 @@ class PendaftaranController extends GetxController {
             .uploadFotoDiri(fotoDiri.value, 'fotodiri');
         final String aktaKelahiranURL = await PendaftaranService()
             .uploadFotoDiri(aktaKelahiran.value, 'aktakelahiran');
+        final String buktiPembayaranURL = await PendaftaranService()
+            .uploadFotoDiri(buktiPembayaran.value, 'buktipembayaran');
         await PendaftaranService().addPendaftaran(
           namaLengkap: namaLengkapController.text,
           tanggalLahir: tanggalLahirController.text,
@@ -95,23 +101,22 @@ class PendaftaranController extends GetxController {
           alamat: alamatController.text,
           fotoDiri: fotoDiriURL,
           aktaKelahiran: aktaKelahiranURL,
-          buktiPembayaran: '',
+          buktiPembayaran: buktiPembayaranURL,
           pembayaran: false,
           status: false,
           descStatus: '',
         );
       }
-
-      Get.to(() => PembayaranPage());
       GetStorage().write('sudahDaftar', true);
       namaLengkapController.clear();
       tanggalLahirController.clear();
       tempatLahirController.clear();
       alamatController.clear();
-
       fotoDiri.value = File('');
       aktaKelahiran.value = File('');
-
+      Get.close(2);
+      Get.snackbar("Berhasil", "Pendaftaran berhasil",
+          backgroundColor: Colors.blueAccent, colorText: Colors.white);
       isPendaftaranLoading.value = false;
     } catch (e) {
       isPendaftaranLoading.value = false;

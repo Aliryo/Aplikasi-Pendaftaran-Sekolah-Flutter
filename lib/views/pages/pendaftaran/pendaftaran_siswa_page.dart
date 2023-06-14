@@ -1,5 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pembayaran_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/select_picture.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_picture.dart';
@@ -7,6 +8,7 @@ import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PendaftaranSiswaBaruPage extends StatelessWidget {
   PendaftaranSiswaBaruPage({super.key});
@@ -46,20 +48,25 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 controller: controller.namaLengkapController,
                 title: 'Nama Lengkap',
                 hintText: 'Masukkan nama lengkap anak anda',
+                onChanged: controller.onNameChange,
                 textInputType: TextInputType.name,
               ),
               WidgetInputText(
                   controller: controller.tanggalLahirController,
                   textInputType: TextInputType.datetime,
+                  
                   title: 'Tanggal Lahir',
+                  onChanged: controller.onTanggalChange,
                   hintText: 'Masukkan tanggal lahir anak anda'),
               WidgetInputText(
                   controller: controller.tempatLahirController,
                   title: 'Tempat Lahir',
+                  onChanged: controller.onTempatChange,
                   hintText: 'Masukkan Tempat lahir anak anda'),
               WidgetInputText(
                   controller: controller.alamatController,
                   title: 'Alamat',
+                  onChanged: controller.onAlamatChange,
                   hintText: 'Masukkan alamat anak anda'),
               WidgetInputPicture(
                 image: controller.fotoDiri.value,
@@ -102,29 +109,23 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 title: 'Foto Akta Kelahiran',
                 subtitle: 'Masukan foto akta kelahiran calon siswa',
               ),
-              //  WidgetInputPicture(
-              //         onTap: () {
-              //           controller.pickFotoBuktiPembayaran();
-              //         },
-              //         title: 'Foto Bukti Pembayaran',
-              //         subtitle: 'Masukan foto bukti pembayaran',
-              //       ),
+              
               16.0.height,
               WidgetButton(
-                loading: controller.isPendaftaranLoading.value,
+               disable: controller.pendaftaraninValid.value,
                 onTap: () {
-                  // var sudahDaftar = GetStorage().read('sudahDaftar');
-                  // sudahDaftar = sudahDaftar ?? false;
-                  // if (sudahDaftar) {
-                  //   Get.snackbar(
-                  //     'Gagal',
-                  //     'Anda sudah mendaftar sebelumnya',
-                  //     backgroundColor: Colors.red,
-                  //     colorText: Colors.white,
-                  //   );
-                  // } else {
-                  controller.addPendaftarBaru();
-                  // }
+                  var sudahDaftar = GetStorage().read('sudahDaftar');
+                  sudahDaftar = sudahDaftar ?? false;
+                  if (sudahDaftar) {
+                    Get.snackbar(
+                      'Gagal',
+                      'Anda sudah mendaftar sebelumnya',
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                  } else {
+                 Get.to(()=>PembayaranPage(controller: controller,));
+                  }
                 },
                 title: 'Daftar Sekarang',
               ),

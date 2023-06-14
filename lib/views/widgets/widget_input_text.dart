@@ -15,8 +15,10 @@ class WidgetInputText extends StatelessWidget {
     this.textInputType,
     this.obscureText = false,
     this.inputFormatters,
+    this.onChanged,
   });
   final Widget? icon;
+  final Function(String)?onChanged;
   final String title;
   final String hintText;
   final String? Function(String?)? validator;
@@ -46,6 +48,7 @@ class WidgetInputText extends StatelessWidget {
           keyboardType: textInputType,
           textInputAction: textInputAction,
           obscureText: obscureText,
+          onChanged: onChanged,
           decoration: InputDecoration(
             suffixIcon: icon,
             border: OutlineInputBorder(

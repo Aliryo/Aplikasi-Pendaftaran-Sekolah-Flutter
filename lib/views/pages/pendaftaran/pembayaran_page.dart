@@ -10,9 +10,8 @@ import '../../../data/src/app_images.dart';
 import '../../widgets/select_picture.dart';
 
 class PembayaranPage extends StatelessWidget {
-  PembayaranPage({super.key});
-  final PendaftaranController controller =
-      Get.isRegistered() ? Get.find() : Get.put(PendaftaranController());
+  const PembayaranPage({super.key, required this.controller});
+  final PendaftaranController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,10 +87,11 @@ class PembayaranPage extends StatelessWidget {
               ])),
               36.0.height,
               WidgetInputPicture(
-                  title: "Upload bukti pembayaran",
-                  subtitle: 'Masukan Bukti pembayaran',
-                  image: controller.buktiPembayaran.value,onTap: () {
-                                      showDialog(
+                title: "Upload bukti pembayaran",
+                subtitle: 'Masukan Bukti pembayaran',
+                image: controller.buktiPembayaran.value,
+                onTap: () {
+                  showDialog(
                       context: context,
                       builder: (context) => SelectPicture(
                             galeryTap: () {
@@ -105,13 +105,16 @@ class PembayaranPage extends StatelessWidget {
                                   type: "BuktiPembayaran", fromGalery: false);
                             },
                           ));
-
-                  },),
-      
+                },
+              ),
               WidgetButton(
+                  disable: controller.penbayaraninValid.value,
+                  loading: controller.isPendaftaranLoading.value,
                   margin: EdgeInsets.symmetric(vertical: 36.h),
                   title: "Konfirmasi Pembayaran",
-                  onTap: () {})
+                  onTap: () {
+                    controller.addPendaftarBaru();
+                  })
             ],
           );
         }),
