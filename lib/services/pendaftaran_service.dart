@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
@@ -24,8 +26,8 @@ class PendaftaranService {
     required String fotoDiri,
     required String aktaKelahiran,
     required String buktiPembayaran,
-    required bool pembayaran,
-    required bool status,
+   
+    required String status,
     required String descStatus,
   }) {
     return _pendaftaran.add({
@@ -36,7 +38,7 @@ class PendaftaranService {
       'foto_diri': fotoDiri,
       'akta_kelahiran': aktaKelahiran,
       'bukti_pembayaran': buktiPembayaran,
-      'pembayaran': pembayaran,
+     
       'status': status,
       'descStatus': descStatus,
       'userId': _uid,
@@ -55,9 +57,19 @@ class PendaftaranService {
     }
   }
 
-  Future updateJadwal(PendaftaranModel pendaftaranModel, String buktiUrl) {
-    return _pendaftaran
-        .doc(pendaftaranModel.id)
-        .update({'bukti_pembayaran': buktiUrl});
+  Future<List<PendaftaranModel>> getPendaftarans() async {
+    try {
+      QuerySnapshot result = await _pendaftaran.get();
+
+      List<PendaftaranModel> pendaftarans = result.docs
+          .map(
+            (e) => PendaftaranModel.fromJson(e.data() as Map<String, dynamic>),
+          )
+          .toList();
+
+      return pendaftarans;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

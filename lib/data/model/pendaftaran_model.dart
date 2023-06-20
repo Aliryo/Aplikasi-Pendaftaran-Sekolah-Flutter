@@ -9,14 +9,14 @@ String pendaftaranModelToJson(PendaftaranModel data) =>
 class PendaftaranModel {
   String? id;
   String? namaLengkap;
-  String? tanggalLahir;
+  DateTime? tanggalLahir;
   String? tempatLahir;
   String? alamat;
   String? selfieUrl;
   String? aktaUrl;
   String? pembayaranUrl;
-  bool? pembayaran;
-  bool? status;
+ 
+  String? status;
   String? descStatus;
   String? uid;
 
@@ -29,7 +29,7 @@ class PendaftaranModel {
     this.selfieUrl,
     this.aktaUrl,
     this.pembayaranUrl,
-    this.pembayaran,
+   
     this.status,
     this.descStatus,
     this.uid,
@@ -38,14 +38,14 @@ class PendaftaranModel {
   PendaftaranModel copyWith({
     String? id,
     String? namaLengkap,
-    String? tanggalLahir,
+    DateTime? tanggalLahir,
     String? tempatLahir,
     String? alamat,
     String? selfieUrl,
     String? aktaUrl,
     String? pembayaranUrl,
-    bool? pembayaran,
-    bool? status,
+  
+    String? status,
     String? descStatus,
   }) =>
       PendaftaranModel(
@@ -57,7 +57,7 @@ class PendaftaranModel {
         selfieUrl: selfieUrl ?? this.selfieUrl,
         aktaUrl: aktaUrl ?? this.aktaUrl,
         pembayaranUrl: pembayaranUrl ?? this.pembayaranUrl,
-        pembayaran: pembayaran ?? this.pembayaran,
+       
         status: status ?? this.status,
         descStatus: descStatus ?? this.descStatus,
       );
@@ -66,13 +66,13 @@ class PendaftaranModel {
       PendaftaranModel(
         id: json["id"],
         namaLengkap: json["nama_lengkap"],
-        tanggalLahir: json["tanggal_lahir"],
+        tanggalLahir:DateTime.parse(json["tanggal_lahir"])  ,
         tempatLahir: json["tempat_lahir"],
         alamat: json["alamat"],
         selfieUrl: json['foto_diri'],
         aktaUrl: json['akta_kelahiran'],
         pembayaranUrl: json['bukti_pembayaran'],
-        pembayaran: json["pembayaran"],
+        
         status: json["status"],
         descStatus: json["descStatus"],
         uid: json["userId"]
@@ -81,13 +81,13 @@ class PendaftaranModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "nama_lengkap": namaLengkap,
-        "tanggal_lahir": tanggalLahir,
+        "tanggal_lahir": tanggalLahir?.toIso8601String(),
         "tempat_lahir": tempatLahir,
         "alamat": alamat,
         'foto_diri': selfieUrl,
         "akta_kelahiran": aktaUrl,
         'bukti_pembayaran': pembayaranUrl,
-        "pembayaran": pembayaran,
+       
         "status": status,
         "descStatus": descStatus,
         'userId':uid

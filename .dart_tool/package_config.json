@@ -105,15 +105,15 @@
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-6.12.0",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-6.15.2",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
+      "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/firebase_auth_web-5.2.10",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/firebase_auth_web-5.5.2",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
+      "languageVersion": "2.18"
     },
     {
       "name": "firebase_core",
@@ -243,7 +243,7 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/intl-0.17.0",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -410,7 +410,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-11T13:03:12.977573Z",
+  "generated": "2023-06-20T14:32:10.395858Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }

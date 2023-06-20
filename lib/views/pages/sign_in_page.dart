@@ -53,6 +53,7 @@ class SignInPage extends StatelessWidget {
               ),
               16.0.height,
               WidgetButton(
+                loading: controller.isLoginLoading.value,
                 onTap: () {
                   controller.login();
                 },

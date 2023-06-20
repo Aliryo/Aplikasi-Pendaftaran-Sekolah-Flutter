@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/pendaftaran_service.dart';
 import 'package:flutter/material.dart';
@@ -9,23 +9,32 @@ import 'package:image_picker/image_picker.dart';
 
 class PendaftaranController extends GetxController {
   final namaLengkapController = TextEditingController();
-  final tanggalLahirController = TextEditingController();
   final tempatLahirController = TextEditingController();
   final alamatController = TextEditingController();
 
+  var isGetLoading = false.obs;
   var isPendaftaranLoading = false.obs;
   var pendaftaranModel = PendaftaranModel().obs;
   var imagePath = ''.obs;
+  var listPendaftaran = <PendaftaranModel>[].obs;
 
   Rx<File> fotoDiri = File('').obs;
   Rx<File> aktaKelahiran = File('').obs;
   Rx<File> buktiPembayaran = File('').obs;
+  var selectedDate = DateTime.now().obs;
 
   var pendaftaraninValid = true.obs;
 
   var penbayaraninValid = true.obs;
   // final _picker = ImagePicker();
 
+  // @override
+  // void onInit() {
+  //   getListPendaftaran();
+  //   super.onInit();
+  // }
+
+  setSelectedDate(DateTime value) => selectedDate.value = value;
   Future camera({required String type, bool fromGalery = false}) async {
     final pickedImage = await ImagePicker().pickImage(
         imageQuality: 88,
@@ -63,7 +72,6 @@ class PendaftaranController extends GetxController {
 
   validatePendaftaran() {
     if (namaLengkapController.text != "" &&
-        tanggalLahirController.text != "" &&
         tempatLahirController.text != "" &&
         alamatController.text != '' &&
         fotoDiri.value.path.isNotEmpty &&
@@ -82,6 +90,19 @@ class PendaftaranController extends GetxController {
     }
   }
 
+  Future<void> getListPendaftaran() async {
+    try {
+      listPendaftaran.clear();
+      isGetLoading.value = true;
+      var data = await PendaftaranService().getPendaftarans();
+      listPendaftaran.assignAll(data);
+      log("Data Pendaftaran => ${listPendaftaran.value}");
+      isGetLoading.value = false;
+    } catch (e) {
+      isGetLoading.value = false;
+    }
+  }
+
   Future addPendaftarBaru() async {
     try {
       isPendaftaranLoading.value = true;
@@ -96,20 +117,19 @@ class PendaftaranController extends GetxController {
             .uploadFotoDiri(buktiPembayaran.value, 'buktipembayaran');
         await PendaftaranService().addPendaftaran(
           namaLengkap: namaLengkapController.text,
-          tanggalLahir: tanggalLahirController.text,
+          tanggalLahir: selectedDate.value.toIso8601String(),
           tempatLahir: tempatLahirController.text,
           alamat: alamatController.text,
           fotoDiri: fotoDiriURL,
           aktaKelahiran: aktaKelahiranURL,
           buktiPembayaran: buktiPembayaranURL,
-          pembayaran: false,
-          status: false,
+          status: "Diproses",
           descStatus: '',
         );
       }
       GetStorage().write('sudahDaftar', true);
       namaLengkapController.clear();
-      tanggalLahirController.clear();
+      selectedDate.value = DateTime.now();
       tempatLahirController.clear();
       alamatController.clear();
       fotoDiri.value = File('');
@@ -129,7 +149,7 @@ class PendaftaranController extends GetxController {
   @override
   void onClose() {
     namaLengkapController.clear();
-    tanggalLahirController.clear();
+    selectedDate.value = DateTime.now();
     tempatLahirController.clear();
     alamatController.clear();
     fotoDiri.value = File('');

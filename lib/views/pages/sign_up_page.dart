@@ -81,6 +81,7 @@ class SignUpPage extends StatelessWidget {
               ),
               16.0.height,
               WidgetButton(
+                loading: controller.isRegisterLoading.value,
                 onTap: () {
                   controller.register();
                 },

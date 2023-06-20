@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../controller/auth_controller.dart';
-import '../../data/src/app_images.dart';
+import '../../../controller/auth_controller.dart';
+import '../../../data/src/app_images.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
@@ -116,14 +116,30 @@ class SettingPage extends StatelessWidget {
               ),
               24.0.height,
               cardSetting(
-                  icon: const Icon(Icons.password, color: Colors.green,),
+                  icon: const Icon(
+                    Icons.password,
+                    color: Colors.green,
+                  ),
                   title: "Ubah Password"),
-            
+              authController.user.value.role == "admin"
+                  ? Column(
+                      children: [
+                        16.0.height,
+                        cardSetting(
+                            onTap: () {},
+                            icon: const Icon(
+                              Icons.person_add,
+                              color: Colors.green,
+                            ),
+                            title: "Tambah Admin"),
+                      ],
+                    )
+                  : const SizedBox(),
               16.0.height,
               cardSetting(
-                onTap: () {
-                  authController.logout();
-                },
+                  onTap: () {
+                    authController.logout();
+                  },
                   icon: const Icon(
                     Icons.logout,
                     color: Colors.green,

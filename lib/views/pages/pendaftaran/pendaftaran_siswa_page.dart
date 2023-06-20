@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 class PendaftaranSiswaBaruPage extends StatelessWidget {
   PendaftaranSiswaBaruPage({super.key});
@@ -51,13 +52,53 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 onChanged: controller.onNameChange,
                 textInputType: TextInputType.name,
               ),
-              WidgetInputText(
-                  controller: controller.tanggalLahirController,
-                  textInputType: TextInputType.datetime,
-                  
-                  title: 'Tanggal Lahir',
-                  onChanged: controller.onTanggalChange,
-                  hintText: 'Masukkan tanggal lahir anak anda'),
+              SizedBox(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Tanggal Lahir",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  8.0.height,
+                  GestureDetector(
+                    onTap: () {
+                      showDatePicker(
+                              context: context,
+                              initialDate: controller.selectedDate.value,
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2100))
+                          .then((value) => controller
+                              .setSelectedDate(value ?? DateTime.now()));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 12.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.blue[50],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            DateFormat("dd MMMM yyyy")
+                                .format(controller.selectedDate.value),
+                          ),
+                          const Icon(
+                            Icons.calendar_month_rounded,
+                            color: Colors.green,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
+              16.0.height,
               WidgetInputText(
                   controller: controller.tempatLahirController,
                   title: 'Tempat Lahir',
@@ -109,23 +150,24 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                 title: 'Foto Akta Kelahiran',
                 subtitle: 'Masukan foto akta kelahiran calon siswa',
               ),
-              
               16.0.height,
               WidgetButton(
-               disable: controller.pendaftaraninValid.value,
+                disable: controller.pendaftaraninValid.value,
                 onTap: () {
-                  var sudahDaftar = GetStorage().read('sudahDaftar');
-                  sudahDaftar = sudahDaftar ?? false;
-                  if (sudahDaftar) {
-                    Get.snackbar(
-                      'Gagal',
-                      'Anda sudah mendaftar sebelumnya',
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
-                    );
-                  } else {
-                 Get.to(()=>PembayaranPage(controller: controller,));
-                  }
+                  // var sudahDaftar = GetStorage().read('sudahDaftar');
+                  // sudahDaftar = sudahDaftar ?? false;
+                  // if (sudahDaftar) {
+                  //   Get.snackbar(
+                  //     'Gagal',
+                  //     'Anda sudah mendaftar sebelumnya',
+                  //     backgroundColor: Colors.red,
+                  //     colorText: Colors.white,
+                  //   );
+                  // } else {
+                    Get.to(() => PembayaranPage(
+                          controller: controller,
+                        ));
+                  // }
                 },
                 title: 'Daftar Sekarang',
               ),

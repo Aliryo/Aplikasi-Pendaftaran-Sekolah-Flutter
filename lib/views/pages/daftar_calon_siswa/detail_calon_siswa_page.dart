@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
+import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
@@ -6,11 +7,12 @@ import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DetailCalonSiswaPage extends StatelessWidget {
-  DetailCalonSiswaPage({super.key});
+  DetailCalonSiswaPage({super.key, required this.pendaftaran});
   final AuthController authController = Get.find();
-
+  final PendaftaranModel pendaftaran;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +31,9 @@ class DetailCalonSiswaPage extends StatelessWidget {
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(
-                AppImages.bocil,
+              child: Image.network(
+                pendaftaran.selfieUrl ?? "",
+                width: 240.w,
               ),
             ),
           ),
@@ -41,35 +44,36 @@ class DetailCalonSiswaPage extends StatelessWidget {
               1: const FlexColumnWidth(),
             },
             children: [
-              const TableRow(children: [
+              TableRow(children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Nama'),
+                  padding: EdgeInsets.all(8.r),
+                  child: const Text('Nama'),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Muhammad Ali Firdaus'),
+                  padding: EdgeInsets.all(8.r),
+                  child: Text((pendaftaran.namaLengkap ?? '').capitalize!),
                 )
               ]),
-              const TableRow(children: [
+              TableRow(children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Tempat Tanggal Lahir'),
+                  padding: EdgeInsets.all(8.r),
+                  child: const Text('Tempat Tanggal Lahir'),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Bandung, 18 April 2017'),
-                )
-              ]),
-              const TableRow(children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Alamat'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.r),
                   child: Text(
-                      'Jl kemang 2, RT 01/Rw 02, Cilandak ,Jakarta Selatan, DKI Jakarta'),
+                      "${(pendaftaran.tempatLahir ?? '').capitalize}, ${DateFormat("dd MMMM yyyy").format(pendaftaran.tanggalLahir ?? DateTime.now())}"),
+                )
+              ]),
+            TableRow(children: [
+                Padding(
+                  padding: EdgeInsets.all(8.r),
+                  child:const Text('Alamat'),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.r),
+                  child: Text(
+                     pendaftaran.alamat??''),
                 )
               ]),
               const TableRow(children: [
