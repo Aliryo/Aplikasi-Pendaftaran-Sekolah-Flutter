@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
@@ -26,7 +24,6 @@ class PendaftaranService {
     required String fotoDiri,
     required String aktaKelahiran,
     required String buktiPembayaran,
-   
     required String status,
     required String descStatus,
   }) {
@@ -38,10 +35,16 @@ class PendaftaranService {
       'foto_diri': fotoDiri,
       'akta_kelahiran': aktaKelahiran,
       'bukti_pembayaran': buktiPembayaran,
-     
       'status': status,
       'descStatus': descStatus,
       'userId': _uid,
+    });
+  }
+
+  Future updateStatus(PendaftaranModel pendaftaranModel) {
+    return _pendaftaran.doc(pendaftaranModel.id).update({
+      'status': pendaftaranModel.status,
+      'descStatus': pendaftaranModel.descStatus,
     });
   }
 

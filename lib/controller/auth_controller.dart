@@ -2,6 +2,8 @@ import 'package:aplikasi_pendaftaran_siswa/data/model/user_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/auth_services.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -86,7 +88,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await AuthService().signOut();
-      Get.off(()=>SignInPage());
+      Get.off(() => SignInPage());
     } catch (e) {
       Get.snackbar("Gagal", "Gagal keluar",
           backgroundColor: Colors.red, colorText: Colors.white);
@@ -100,5 +102,14 @@ class AuthController extends GetxController {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  getUser() async {
+    var role = await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
+        .snapshots()
+        .first;
+    return role;
   }
 }

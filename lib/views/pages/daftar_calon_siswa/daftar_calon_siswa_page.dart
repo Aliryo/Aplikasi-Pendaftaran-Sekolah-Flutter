@@ -1,6 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
-import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/detail_calon_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/widget_daftar_calon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

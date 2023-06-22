@@ -11,6 +11,7 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/setting/setting_page.dart
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -57,20 +58,28 @@ class HomePage extends StatelessWidget {
           );
         }),
       ),
-      body: Obx(() {
-        return ListView(
-          padding: EdgeInsets.all(24.w),
-          children: [
-            const Text(
-              'Daftar Menu',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+      body: ListView(
+        padding: EdgeInsets.all(24.w),
+        children: [
+          const Text(
+            'Daftar Menu',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-            16.0.height,
-            authController.user.value.role == "member"
-                ? Center(
+          ),
+          16.0.height,
+          FutureBuilder(
+            future: authController.getUser(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              var data = snapshot.data as QuerySnapshot;
+              var role = (data.docs[0]['role']);
+              if (snapshot.hasData) {
+                if (role == 'member') {
+                  return Center(
                     child: Wrap(
                       runSpacing: 16.h,
                       spacing: 8.w,
@@ -154,8 +163,9 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
-                : Center(
+                  );
+                } else {
+                  return Center(
                     child: Wrap(
                       runSpacing: 20.h,
                       spacing: 12.w,
@@ -215,71 +225,76 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-            16.0.height,
-            const Text(
-              'Kegiatan Sekolah',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+                  );
+                }
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          16.0.height,
+          const Text(
+            'Kegiatan Sekolah',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-            16.0.height,
-            CarouselSlider(
-              items: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.r),
-                    child: Image.asset(
-                      AppImages.kegiatan,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+          ),
+          16.0.height,
+          CarouselSlider(
+            items: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(
+                    AppImages.kegiatan,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-              options: CarouselOptions(
-                height: 180.h,
-                viewportFraction: 1,
-                autoPlay: true,
-                initialPage: 0,
-                onPageChanged: (index, reason) {},
               ),
+            ],
+            options: CarouselOptions(
+              height: 180.h,
+              viewportFraction: 1,
+              autoPlay: true,
+              initialPage: 0,
+              onPageChanged: (index, reason) {},
             ),
-            4.0.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                indicator(1),
-              ],
+          ),
+          4.0.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              indicator(1),
+            ],
+          ),
+          16.0.height,
+          const Text(
+            'Berita Sekolah',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-            16.0.height,
-            const Text(
-              'Berita Sekolah',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            16.0.height,
-            const WidgetNewsList(
-              image: AppImages.berita1,
-              title: 'Acara halal bihalal setelah Idul Fitri',
-              subtitle:
-                  'Setelah libur lebaran idul fitri selesai, sekolah mengadakan acara halal bihalal antara guru dan murid, sebagai bentuk pengajaran pendidikan.',
-              date: 'Senin, 27 April 2023',
-            ),
-            const WidgetNewsList(
-              image: AppImages.berita2,
-              title: 'Persipan lomba pesta siaga',
-              subtitle:
-                  'Dalam rangka menyambut perlombaan persta siaga antar SD di kecamatan tembalang, semarang, siswa mengadakan latihan kegiatan.',
-              date: 'Senin, 26 April 2023',
-            ),
-          ],
-        );
-      }),
+          ),
+          16.0.height,
+          const WidgetNewsList(
+            image: AppImages.berita1,
+            title: 'Acara halal bihalal setelah Idul Fitri',
+            subtitle:
+                'Setelah libur lebaran idul fitri selesai, sekolah mengadakan acara halal bihalal antara guru dan murid, sebagai bentuk pengajaran pendidikan.',
+            date: 'Senin, 27 April 2023',
+          ),
+          const WidgetNewsList(
+            image: AppImages.berita2,
+            title: 'Persipan lomba pesta siaga',
+            subtitle:
+                'Dalam rangka menyambut perlombaan persta siaga antar SD di kecamatan tembalang, semarang, siswa mengadakan latihan kegiatan.',
+            date: 'Senin, 26 April 2023',
+          ),
+        ],
+      ),
     );
   }
 

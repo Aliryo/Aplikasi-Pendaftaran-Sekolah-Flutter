@@ -1,6 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
-import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
@@ -65,27 +64,26 @@ class DetailCalonSiswaPage extends StatelessWidget {
                       "${(pendaftaran.tempatLahir ?? '').capitalize}, ${DateFormat("dd MMMM yyyy").format(pendaftaran.tanggalLahir ?? DateTime.now())}"),
                 )
               ]),
-            TableRow(children: [
+              TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.r),
-                  child:const Text('Alamat'),
+                  child: const Text('Alamat'),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.r),
-                  child: Text(
-                     pendaftaran.alamat??''),
+                  child: Text(pendaftaran.alamat ?? ''),
                 )
               ]),
-              const TableRow(children: [
-                Padding(
+              TableRow(children: [
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Status'),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Diterima',
-                    style: TextStyle(color: Colors.green),
+                    pendaftaran.status ?? '',
+                    style: const TextStyle(color: Colors.green),
                   ),
                 )
               ]),
