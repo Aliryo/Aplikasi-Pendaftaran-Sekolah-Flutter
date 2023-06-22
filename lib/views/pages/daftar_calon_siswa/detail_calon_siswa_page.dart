@@ -115,10 +115,13 @@ class DetailCalonSiswaPage extends StatelessWidget {
                     color: Colors.green[200],
                   ),
                 )
-              : const Text(
-                  'Selamat anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
+              : Text(
+                  pendaftaran.status == 'Diproses'
+                      ? 'Pendaftaran sedang diproses, mohon ditunggu untuk pengumuman hasilnya'
+                      : 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w500),
                 ),
           authController.user.value.role == 'admin'
               ? 32.0.height
