@@ -1,4 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -116,6 +118,54 @@ class SettingPage extends StatelessWidget {
               ),
               24.0.height,
               cardSetting(
+                  onTap: () {
+                    showModalBottomSheet(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20))),
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) {
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 24.h, vertical: 32.h),
+                                child: Form(
+                                  key: authController.changePasswordKey,
+                                  child: Column(
+                                    children: [
+                                      WidgetInputText(
+                                        controller: authController
+                                            .changePasswordController,
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.isEmpty ||
+                                              value.length < 6) {
+                                            return 'Password Minimal 6 Karakter';
+                                          }
+                                          return null;
+                                        },
+                                        title: 'Ubah Password',
+                                        hintText: 'Masukkan Password Baru',
+                                      ),
+                                      WidgetButton(
+                                        title: 'Simpan',
+                                        onTap: () {
+                                          authController.changePassword();
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  },
                   icon: const Icon(
                     Icons.password,
                     color: Colors.green,

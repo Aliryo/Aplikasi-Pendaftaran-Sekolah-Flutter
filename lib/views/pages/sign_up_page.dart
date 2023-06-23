@@ -46,8 +46,12 @@ class SignUpPage extends StatelessWidget {
               WidgetInputText(
                 title: "Password",
                 hintText: "Masukan password anda",
-                validator: (value) =>
-                    value == "" ? "Password tidak boleh kosong" : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty || value.length < 6) {
+                    return 'Password Minimal 6 Karakter';
+                  }
+                  return null;
+                },
                 icon: GestureDetector(
                     onTap: () => controller.changeHidePasswordRegister(),
                     child: Icon(

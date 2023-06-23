@@ -16,6 +16,7 @@ class AuthController extends GetxController {
   final confirmController = TextEditingController();
   final emailLoginController = TextEditingController();
   final passwordLoginController = TextEditingController();
+  final changePasswordController = TextEditingController();
 
   var isRegisterLoading = false.obs;
   var isLoginLoading = false.obs;
@@ -25,6 +26,7 @@ class AuthController extends GetxController {
   var user = UserModel().obs;
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> changePasswordKey = GlobalKey<FormState>();
 
   void changeHidePasswordRegister() =>
       hidePasswordRegister.value = !hidePasswordRegister.value;
@@ -51,14 +53,19 @@ class AuthController extends GetxController {
 
   Future<void> register() async {
     try {
-      isRegisterLoading.value = true;
-      var data = await AuthService().signUp(
-          email: emailController.text,
-          password: passwordController.text,
-          name: nameController.text);
-      user.value = data;
-      Get.to(() => HomePage());
-      clearRegister();
+      if (registerKey.currentState != null) {
+        if (registerKey.currentState!.validate()) {
+          registerKey.currentState!.save();
+          isRegisterLoading.value = true;
+          var data = await AuthService().signUp(
+              email: emailController.text,
+              password: passwordController.text,
+              name: nameController.text);
+          user.value = data;
+          Get.to(() => HomePage());
+          clearRegister();
+        }
+      }
     } catch (e) {
       clearRegister();
       Get.snackbar("Gagal", "Email sudah terdaftar",
@@ -69,14 +76,19 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     try {
-      isLoginLoading.value = true;
-      var data = await AuthService().signIn(
-        email: emailLoginController.text,
-        password: passwordLoginController.text,
-      );
-      user.value = data;
-      Get.to(() => HomePage());
-      clearLogin();
+      if (loginKey.currentState != null) {
+        if (loginKey.currentState!.validate()) {
+          loginKey.currentState!.save();
+          isLoginLoading.value = true;
+          var data = await AuthService().signIn(
+            email: emailLoginController.text,
+            password: passwordLoginController.text,
+          );
+          user.value = data;
+          Get.to(() => HomePage());
+          clearLogin();
+        }
+      }
     } catch (e) {
       clearLogin();
       Get.snackbar("Gagal", "Email atau password salah",
@@ -88,7 +100,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await AuthService().signOut();
-      Get.off(() => SignInPage());
+      Get.offAll(() => SignInPage());
     } catch (e) {
       Get.snackbar("Gagal", "Gagal keluar",
           backgroundColor: Colors.red, colorText: Colors.white);
@@ -111,5 +123,17 @@ class AuthController extends GetxController {
         .snapshots()
         .first;
     return role;
+  }
+
+  changePassword() {
+    if (changePasswordKey.currentState != null) {
+      if (changePasswordKey.currentState!.validate()) {
+        changePasswordKey.currentState!.save();
+        AuthService().changePassword(changePasswordController.text);
+        changePasswordController.text = '';
+        Get.snackbar("Sukses", "Berhasil Mengubah Password",
+            backgroundColor: Colors.blue, colorText: Colors.white);
+      }
+    }
   }
 }

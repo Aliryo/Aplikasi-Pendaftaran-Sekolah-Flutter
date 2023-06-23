@@ -53,5 +53,8 @@ class AuthService {
       rethrow;
     }
   }
-  
+
+  changePassword(String newPassword) async {
+    await _auth.currentUser!.updatePassword(newPassword);
+  }
 }
