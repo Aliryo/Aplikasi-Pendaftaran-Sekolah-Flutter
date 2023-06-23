@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aplikasi_pendaftaran_siswa/data/model/jadwal_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -32,5 +34,21 @@ class JadwalService {
 
   Future deleteJadwal(String docId) {
     return _jadwal.doc(docId).delete();
+  }
+
+  Future<List<JadwalModel>> getJadwals() async {
+    try {
+      QuerySnapshot result = await _jadwal.get();
+
+      log("result $result");
+      List<JadwalModel> jadwal = result.docs
+          .map(
+            (e) => JadwalModel.fromJson(e.data() as Map<String, dynamic>),
+          )
+          .toList();
+      return jadwal;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

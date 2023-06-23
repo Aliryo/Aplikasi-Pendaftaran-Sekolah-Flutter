@@ -190,7 +190,7 @@ class HomePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const JadwalPendaftaranAdminPage(),
+                               JadwalPendaftaranAdminPage(),
                               ),
                             );
                           },

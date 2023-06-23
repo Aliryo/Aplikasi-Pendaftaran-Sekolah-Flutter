@@ -3,10 +3,25 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class JadwalPendaftaranPage extends StatelessWidget {
+import '../../controller/jadwal_controller.dart';
+
+class JadwalPendaftaranPage extends StatefulWidget {
   const JadwalPendaftaranPage({super.key});
 
+  @override
+  State<JadwalPendaftaranPage> createState() => _JadwalPendaftaranPageState();
+}
+
+class _JadwalPendaftaranPageState extends State<JadwalPendaftaranPage> {
+  final JadwalController controller = Get.put(JadwalController());
+
+  @override
+  void initState() {
+    // controller.getJadwal();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     int currentStep = 3;

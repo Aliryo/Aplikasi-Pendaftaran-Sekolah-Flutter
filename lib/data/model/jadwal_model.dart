@@ -7,7 +7,7 @@ String pendaftaranModelToJson(JadwalModel data) => json.encode(data.toJson());
 
 class JadwalModel {
   String? id;
-  String? fase;
+  int? fase;
   String? title;
   DateTime? beginAt;
   DateTime? endAt;
@@ -24,7 +24,7 @@ class JadwalModel {
 
   JadwalModel copyWith({
     String? id,
-    String? fase,
+    int? fase,
     String? title,
     DateTime? beginAt,
     DateTime? endAt,
@@ -43,16 +43,16 @@ class JadwalModel {
       id: json['id'],
       fase: json['fase'],
       title: json['title'],
-      beginAt: json['begin_at'],
-      endAt: json['end_at'],
+      beginAt:DateTime.parse(json['begin_at']) ,
+      endAt: DateTime.parse(json['end_at']),
       deskripsi: json['desc']);
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'fase': fase,
         'title': title,
-        'begin_at': beginAt,
-        'end_at': endAt,
+        'begin_at': beginAt?.toIso8601String(),
+        'end_at': endAt?.toIso8601String(),
         'desc': deskripsi,
       };
 }
