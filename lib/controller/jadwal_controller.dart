@@ -20,7 +20,7 @@ class JadwalController extends GetxController {
       var data = await JadwalService().getJadwals();
       data.sort((a,b)=> a.fase!.compareTo(b.fase!));
       jadwals.assignAll(data);
-      log("Data Jadwal => ${jadwals.value}");
+      log("Data Jadwal => $jadwals");
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;

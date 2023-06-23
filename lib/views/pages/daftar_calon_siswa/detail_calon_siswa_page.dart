@@ -14,6 +14,94 @@ class DetailCalonSiswaPage extends StatelessWidget {
   final PendaftaranModel pendaftaran;
   @override
   Widget build(BuildContext context) {
+    Widget admin() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          12.0.height,
+          Padding(
+            padding: EdgeInsets.only(left: 8.w),
+            child: Text(
+              "Foto akta Kelahiran",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
+            ),
+          ),
+          8.0.height,
+          Container(
+            width: double.infinity,
+            height: 220.h,
+            padding: EdgeInsets.all(12.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Colors.green),
+            ),
+            child: Image.network(pendaftaran.aktaUrl ?? '', fit: BoxFit.cover),
+          ),
+          16.0.height,
+          Padding(
+            padding: EdgeInsets.only(left: 8.w),
+            child: Text(
+              "Bukti pembayaran",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
+            ),
+          ),
+          8.0.height,
+          Container(
+            width: double.infinity,
+            height: 220.h,
+            padding: EdgeInsets.all(12.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Colors.green),
+            ),
+            child: Image.network(
+              pendaftaran.pembayaranUrl ?? '',
+              fit: BoxFit.cover,
+            ),
+          ),
+          24.0.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: WidgetButton(
+                  onTap: () {},
+                  title: 'Terima',
+                ),
+              ),
+              16.0.width,
+              Expanded(
+                  child: WidgetButton(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => const AlertDitolak());
+                },
+                title: 'Tolak',
+                color: Colors.redAccent,
+              )),
+            ],
+          )
+        ],
+      );
+    }
+
+    Widget user() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          32.0.height,
+          Text(
+            pendaftaran.status == 'Diproses'
+                ? 'Pendaftaran sedang diproses, mohon ditunggu untuk pengumuman hasilnya'
+                : 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -87,69 +175,10 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   ),
                 )
               ]),
-              if (authController.user.value.role == 'admin')
-                const TableRow(children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Foto Akta kelahiran'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      '',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  )
-                ]),
             ],
             border: TableBorder.all(width: 0, color: Colors.transparent),
           ),
-          authController.user.value.role == 'admin' ? 16.0.height : 32.0.height,
-          authController.user.value.role == 'admin'
-              ? Container(
-                  width: double.infinity,
-                  height: 280.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.r),
-                    border: Border.all(color: Colors.green),
-                    color: Colors.green[200],
-                  ),
-                )
-              : Text(
-                  pendaftaran.status == 'Diproses'
-                      ? 'Pendaftaran sedang diproses, mohon ditunggu untuk pengumuman hasilnya'
-                      : 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-          authController.user.value.role == 'admin'
-              ? 32.0.height
-              : const SizedBox(),
-          authController.user.value.role == 'admin'
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: WidgetButton(
-                        onTap: () {},
-                        title: 'Terima',
-                      ),
-                    ),
-                    16.0.width,
-                    Expanded(
-                        child: WidgetButton(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => const AlertDitolak());
-                      },
-                      title: 'Tolak',
-                      color: Colors.redAccent,
-                    )),
-                  ],
-                )
-              : const SizedBox()
+          authController.user.value.role == 'admin' ? admin() : user(),
         ],
       ),
     );

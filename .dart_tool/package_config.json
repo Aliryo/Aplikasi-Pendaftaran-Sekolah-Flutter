@@ -74,6 +74,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dropdown_button2",
+      "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/dropdown_button2-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "email_validator",
       "rootUri": "file:///home/aditya/.pub-cache/hosted/pub.dev/email_validator-2.1.17",
       "packageUri": "lib/",
@@ -410,7 +416,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-20T14:32:10.395858Z",
+  "generated": "2023-06-23T15:03:50.544012Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }

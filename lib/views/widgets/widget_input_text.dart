@@ -16,10 +16,12 @@ class WidgetInputText extends StatelessWidget {
     this.obscureText = false,
     this.inputFormatters,
     this.onChanged,
+    this.maxLine = 1,
   });
   final Widget? icon;
-  final Function(String)?onChanged;
+  final Function(String)? onChanged;
   final String title;
+  final int maxLine;
   final String hintText;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
@@ -49,6 +51,7 @@ class WidgetInputText extends StatelessWidget {
           textInputAction: textInputAction,
           obscureText: obscureText,
           onChanged: onChanged,
+          maxLines: maxLine,
           decoration: InputDecoration(
             suffixIcon: icon,
             border: OutlineInputBorder(

@@ -96,7 +96,7 @@ class PendaftaranController extends GetxController {
       isGetLoading.value = true;
       var data = await PendaftaranService().getPendaftarans();
       listPendaftaran.assignAll(data);
-      log("Data Pendaftaran => ${listPendaftaran.value}");
+      log("Data Pendaftaran => $listPendaftaran");
       isGetLoading.value = false;
     } catch (e) {
       isGetLoading.value = false;
