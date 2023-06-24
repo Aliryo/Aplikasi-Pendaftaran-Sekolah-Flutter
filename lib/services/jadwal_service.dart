@@ -22,13 +22,20 @@ class JadwalService {
     });
   }
 
-  Future updateJadwal(JadwalModel jadwalModel) {
-    return _jadwal.doc(jadwalModel.id).update({
-      'fase': jadwalModel.fase,
-      'title': jadwalModel.title,
-      'begin_at': jadwalModel.beginAt,
-      'end_at': jadwalModel.endAt,
-      'desc': jadwalModel.deskripsi,
+  Future updateJadwal({
+    required String id,
+    required int fase,
+    required String judul,
+    required String startDate,
+    required String endDate,
+    required String desrkipsi,
+  }) {
+    return _jadwal.doc(id).update({
+      'fase': fase,
+      'title': judul,
+      'begin_at': startDate,
+      'end_at': endDate,
+      'desc': desrkipsi,
     });
   }
 
@@ -43,7 +50,8 @@ class JadwalService {
       log("result $result");
       List<JadwalModel> jadwal = result.docs
           .map(
-            (e) => JadwalModel.fromJson(e.data() as Map<String, dynamic>),
+            (e) => JadwalModel.fromJson(e.data() as Map<String, dynamic>)
+                .copyWith(id: e.id),
           )
           .toList();
       return jadwal;

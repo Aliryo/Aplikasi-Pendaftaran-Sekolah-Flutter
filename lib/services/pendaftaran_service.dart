@@ -66,7 +66,8 @@ class PendaftaranService {
 
       List<PendaftaranModel> pendaftarans = result.docs
           .map(
-            (e) => PendaftaranModel.fromJson(e.data() as Map<String, dynamic>),
+            (e) => PendaftaranModel.fromJson(e.data() as Map<String, dynamic>)
+                .copyWith(id: e.id),
           )
           .toList();
 

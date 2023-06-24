@@ -14,7 +14,10 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget cardJadwal(JadwalModel jadwal) {
       return GestureDetector(
-        onTap: () => Get.to(()=> UbahJadwal()),
+        onTap: () {
+          controller.setJadwal(jadwal);
+          Get.to(() => UbahJadwal());
+        },
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 16.w,
@@ -43,14 +46,14 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
                   children: [
                     Text(
                       jadwal.title ?? "",
-                      style:
-                          TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeight.w600),
                     ),
                     2.0.height,
                     Text(
                       jadwal.deskripsi ?? "",
-                      style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                          fontSize: 14.sp, fontWeight: FontWeight.w400),
                     ),
                     2.0.height,
                     Text(
@@ -58,8 +61,8 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
                           ? DateFormat("dd MMMM yyyy")
                               .format(jadwal.beginAt ?? DateTime.now())
                           : "${DateFormat("dd MMMM yyyy").format(jadwal.beginAt ?? DateTime.now())} - ${DateFormat("dd MMMM yyyy").format(jadwal.endAt ?? DateTime.now())}",
-                      style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                          fontSize: 14.sp, fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),
