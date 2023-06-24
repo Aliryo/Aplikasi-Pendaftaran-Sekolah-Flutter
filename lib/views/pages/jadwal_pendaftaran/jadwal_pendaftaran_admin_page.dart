@@ -1,7 +1,9 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/jadwal_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran/tambah_jadwal.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran/ubah_jadwal.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -97,7 +99,15 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
                     itemBuilder: (context, index) =>
                         cardJadwal(controller.jadwals[index]),
                     itemCount: controller.jadwals.length,
-                  ))
+                  )),
+                  controller.jadwals.length<4? WidgetButton(
+                    title: "Tambah Jadwal",
+                    onTap: () {
+                      controller.removeFase();
+                      Get.to(()=> TambahJadwal());},
+                    margin: EdgeInsets.only(
+                        bottom: 32.h, left: 24.w, right: 24.w, top: 16.h),
+                  ):const SizedBox()
                 ],
               );
       }),

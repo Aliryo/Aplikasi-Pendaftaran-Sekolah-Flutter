@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DaftarCalonSiswaPage extends StatefulWidget {
-  DaftarCalonSiswaPage({super.key});
+  const DaftarCalonSiswaPage({super.key});
 
   @override
   State<DaftarCalonSiswaPage> createState() => _DaftarCalonSiswaPageState();

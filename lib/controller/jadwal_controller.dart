@@ -8,13 +8,22 @@ import 'package:get/get.dart';
 class JadwalController extends GetxController {
   var isLoading = false.obs;
   var isUpdateLodaing = false.obs;
+
+  var isAddLoading = false.obs;
   var jadwals = <JadwalModel>[].obs;
   var selectedJadwal = JadwalModel().obs;
   var startdate =
       DateTime.now().subtract(Duration(days: DateTime.now().day - 1)).obs;
   var endDate = DateTime.now().obs;
+  var tanggalMulai =
+      DateTime.now().subtract(Duration(days: DateTime.now().day - 1)).obs;
+  var tanggalSelesai = DateTime.now().obs;
   var judulController = TextEditingController();
   var deskripsiController = TextEditingController();
+  var judulAddController = TextEditingController();
+  var deskripsiAddController = TextEditingController();
+  List<int> listFase = [1, 2, 3, 4];
+  var fase = 1.obs;
 
   @override
   void onInit() {
@@ -30,8 +39,13 @@ class JadwalController extends GetxController {
     deskripsiController.text = jadwal.deskripsi ?? '';
   }
 
+  setSelectedFase(int index) => fase.value = index;
+
   setStartDate(DateTime value) => startdate.value = value;
   setEndDate(DateTime value) => endDate.value = value;
+
+  setTanggalMulai(DateTime value) => tanggalMulai.value = value;
+  setTanggalSelesai(DateTime value) => tanggalSelesai.value = value;
 
   Future<void> getJadwal() async {
     try {
@@ -50,7 +64,7 @@ class JadwalController extends GetxController {
   Future<void> updateJadwal() async {
     try {
       isUpdateLodaing.value = true;
-     await JadwalService().updateJadwal(
+      await JadwalService().updateJadwal(
           id: selectedJadwal.value.id!,
           fase: selectedJadwal.value.fase!,
           judul: judulController.text,
@@ -63,16 +77,36 @@ class JadwalController extends GetxController {
       Get.close(1);
       isUpdateLodaing.value = false;
     } catch (e) {
+      Get.snackbar("Gagal", "Gagal mengubah jadwal",
+          backgroundColor: Colors.red, colorText: Colors.white);
       isUpdateLodaing.value = false;
     }
   }
-  // Future<void> addJadwal() async {
-  //   await JadwalService().addJadwal(
-  //       fase: "masuk sekolah",
-  //       title: "Masuk Sekolah",
-  //       beginAt: DateTime.now().toIso8601String(),
-  //       endAt: DateTime.now().toIso8601String(),
-  //       deskripsi: "Masuk sekolah hari pertama bagi para peserta didik baru ");
-  //       log("Jadwal upload");
-  // }
+
+  void removeFase() {
+    for (var jadwal in jadwals) {
+      listFase.removeWhere((element) => element == jadwal.fase);
+    }
+  }
+
+  Future<void> addJadwal() async {
+    try {
+      isAddLoading.value = true;
+      await JadwalService().addJadwal(
+          fase: fase.value,
+          title: judulAddController.text,
+          beginAt: tanggalMulai.value.toIso8601String(),
+          endAt: tanggalSelesai.value.toIso8601String(),
+          deskripsi: deskripsiAddController.text);
+      getJadwal();
+      Get.snackbar("Succes", "Berhasil mengubah jadwal",
+          backgroundColor: Colors.blue, colorText: Colors.white);
+      Get.close(1);
+      isAddLoading.value = false;
+    } catch (e) {
+      Get.snackbar("Gagal", "Gagal menambahkan jadwal",
+          backgroundColor: Colors.red, colorText: Colors.white);
+      isAddLoading.value = false;
+    }
+  }
 }

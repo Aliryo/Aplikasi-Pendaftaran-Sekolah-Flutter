@@ -7,7 +7,7 @@ class JadwalService {
   final _jadwal = FirebaseFirestore.instance.collection('jadwal');
 
   Future addJadwal({
-    required String fase,
+    required int fase,
     required String title,
     required String beginAt,
     required String endAt,

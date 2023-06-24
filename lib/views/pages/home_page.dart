@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DaftarCalonSiswaPage(),
+                                builder: (context) => const DaftarCalonSiswaPage(),
                               ),
                             );
                           },
@@ -176,7 +176,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DaftarCalonSiswaPage(),
+                                builder: (context) => const DaftarCalonSiswaPage(),
                               ),
                             );
                           },
