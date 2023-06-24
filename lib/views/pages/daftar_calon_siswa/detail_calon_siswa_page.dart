@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
+import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
@@ -11,7 +12,9 @@ import 'package:intl/intl.dart';
 class DetailCalonSiswaPage extends StatelessWidget {
   DetailCalonSiswaPage({super.key, required this.pendaftaran});
   final AuthController authController = Get.find();
+  final PendaftaranController pendaftaranController = Get.find();
   final PendaftaranModel pendaftaran;
+
   @override
   Widget build(BuildContext context) {
     Widget admin() {
@@ -65,7 +68,12 @@ class DetailCalonSiswaPage extends StatelessWidget {
             children: [
               Expanded(
                 child: WidgetButton(
-                  onTap: () {},
+                  onTap: () {
+                    pendaftaranController.updatePendaftaran(
+                      id: pendaftaran.id ?? '',
+                      status: "Diterima",
+                    );
+                  },
                   title: 'Terima',
                 ),
               ),
@@ -75,7 +83,8 @@ class DetailCalonSiswaPage extends StatelessWidget {
                 onTap: () {
                   showDialog(
                       context: context,
-                      builder: (context) => const AlertDitolak());
+                      builder: (context) =>
+                          AlertDitolak(id: pendaftaran.id ?? ''));
                 },
                 title: 'Tolak',
                 color: Colors.redAccent,

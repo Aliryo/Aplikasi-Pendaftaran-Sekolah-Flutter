@@ -1,11 +1,14 @@
+import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class AlertDitolak extends StatelessWidget {
-  const AlertDitolak({super.key});
-
+  AlertDitolak({super.key, required this.id});
+  final PendaftaranController pendaftaranController = Get.find();
+  final String id;
   @override
   Widget build(BuildContext context) {
     Widget title() {
@@ -43,6 +46,7 @@ class AlertDitolak extends StatelessWidget {
           Container(
             color: const Color(0xffE4EDFF),
             child: TextFormField(
+              controller: pendaftaranController.descController,
               maxLines: 6,
               cursorColor: Theme.of(context).indicatorColor,
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -70,14 +74,17 @@ class AlertDitolak extends StatelessWidget {
               Expanded(
                   child: WidgetButton(
                 onTap: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
                 title: 'Batal',
               )),
               16.0.width,
               Expanded(
                   child: WidgetButton(
-                onTap: () {},
+                onTap: () {
+                  pendaftaranController.updatePendaftaran(
+                      status: "Ditolak", id: id);
+                },
                 title: 'Konfirmasi',
                 color: Colors.red,
               )),

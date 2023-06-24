@@ -11,10 +11,13 @@ class PendaftaranController extends GetxController {
   final namaLengkapController = TextEditingController();
   final tempatLahirController = TextEditingController();
   final alamatController = TextEditingController();
+  final statusController = TextEditingController();
+  final descController = TextEditingController();
 
   var isGetLoading = false.obs;
   var isPendaftaranLoading = false.obs;
-  var pendaftaranModel = PendaftaranModel().obs;
+  var isUpdateLoading = false.obs;
+  var selectedPendaftar = PendaftaranModel().obs;
   var imagePath = ''.obs;
   var listPendaftaran = <PendaftaranModel>[].obs;
 
@@ -143,6 +146,22 @@ class PendaftaranController extends GetxController {
       Get.snackbar('Gagal', e.toString(),
           backgroundColor: Colors.red, colorText: Colors.white);
       throw Exception(e.toString());
+    }
+  }
+
+  Future<void> updatePendaftaran(
+      {required String status, required String id}) async {
+    try {
+      isUpdateLoading.value = true;
+      await PendaftaranService().updateStatus(
+          id: id, status: status, descStatus: descController.text);
+      getListPendaftaran();
+      Get.snackbar("Sukses", "Berhasil mengubah status pendaftar",
+          backgroundColor: Colors.blue, colorText: Colors.white);
+      Get.close(1);
+      isUpdateLoading.value = false;
+    } catch (e) {
+      isUpdateLoading.value = false;
     }
   }
 

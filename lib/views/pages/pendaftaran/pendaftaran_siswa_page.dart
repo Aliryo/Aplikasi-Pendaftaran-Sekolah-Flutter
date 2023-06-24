@@ -163,9 +163,9 @@ class PendaftaranSiswaBaruPage extends StatelessWidget {
                   //     colorText: Colors.white,
                   //   );
                   // } else {
-                    Get.to(() => PembayaranPage(
-                          controller: controller,
-                        ));
+                  Get.to(() => PembayaranPage(
+                        controller: controller,
+                      ));
                   // }
                 },
                 title: 'Daftar Sekarang',

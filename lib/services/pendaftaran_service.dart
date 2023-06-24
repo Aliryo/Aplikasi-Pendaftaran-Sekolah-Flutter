@@ -41,10 +41,14 @@ class PendaftaranService {
     });
   }
 
-  Future updateStatus(PendaftaranModel pendaftaranModel) {
-    return _pendaftaran.doc(pendaftaranModel.id).update({
-      'status': pendaftaranModel.status,
-      'descStatus': pendaftaranModel.descStatus,
+  Future updateStatus({
+    required String id,
+    String status = '',
+    String descStatus = '',
+  }) {
+    return _pendaftaran.doc(id).update({
+      'status': status,
+      'descStatus': descStatus,
     });
   }
 
