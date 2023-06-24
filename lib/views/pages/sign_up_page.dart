@@ -64,7 +64,7 @@ class SignUpPage extends StatelessWidget {
                 controller: controller.passwordController,
               ),
               WidgetInputText(
-                title: "Password",
+                title: "Konfirmasi Password",
                 hintText: "Masukan password anda",
                 validator: (value) =>
                     value != controller.passwordController.text

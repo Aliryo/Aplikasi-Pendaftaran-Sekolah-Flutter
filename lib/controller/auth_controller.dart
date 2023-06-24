@@ -17,16 +17,30 @@ class AuthController extends GetxController {
   final emailLoginController = TextEditingController();
   final passwordLoginController = TextEditingController();
   final changePasswordController = TextEditingController();
+  final nameAdminController = TextEditingController();
+  final emailAdminController = TextEditingController();
+  final passwordAdminController = TextEditingController();
+  final confirmAdminContoller = TextEditingController();
 
   var isRegisterLoading = false.obs;
   var isLoginLoading = false.obs;
+  var isAddAdminLoading = false.obs;
   var hidePasswordRegister = true.obs;
   var hideConfirmRegister = true.obs;
+  var hidePasswordAddAdmin = true.obs;
+  var hideConfirmAddAdmin = true.obs;
   var hidePasswordLogin = true.obs;
   var user = UserModel().obs;
   final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
   final GlobalKey<FormState> changePasswordKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> addAdminKey = GlobalKey<FormState>();
+
+  void changeHidePasswordAddAdmin() =>
+      hidePasswordAddAdmin.value = !hidePasswordAddAdmin.value;
+
+  void changeHideConfirmAddAdmin() =>
+      hideConfirmAddAdmin.value = !hideConfirmAddAdmin.value;
 
   void changeHidePasswordRegister() =>
       hidePasswordRegister.value = !hidePasswordRegister.value;
@@ -45,10 +59,42 @@ class AuthController extends GetxController {
     confirmController.clear();
   }
 
+  clearAddAdmin() {
+    isAddAdminLoading.value = false;
+    emailAdminController.clear();
+    passwordAdminController.clear();
+    nameAdminController.clear();
+    confirmAdminContoller.clear();
+  }
+
   void clearLogin() {
     isLoginLoading.value = false;
     emailLoginController.clear();
     passwordLoginController.clear();
+  }
+
+  Future<void> addAdmin() async {
+    try {
+      if (addAdminKey.currentState != null) {
+        if (addAdminKey.currentState!.validate()) {
+          addAdminKey.currentState!.save();
+          isAddAdminLoading.value = true;
+          await AuthService().addAdmin(
+            email: emailAdminController.text,
+            password: passwordAdminController.text,
+            name: nameAdminController.text,
+          );
+          Get.snackbar("Sukses", "Berhasil Menambahkan Admin Baru",
+              backgroundColor: Colors.blue, colorText: Colors.white);
+          clearAddAdmin();
+        }
+      }
+    } catch (e) {
+      clearAddAdmin();
+      Get.snackbar("Gagal", "Mohon Periksa Data Kembali",
+          backgroundColor: Colors.redAccent, colorText: Colors.white);
+      throw Exception(e.toString());
+    }
   }
 
   Future<void> register() async {

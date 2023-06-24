@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/setting/tambah_admin_page.dart.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart';
 import 'package:flutter/material.dart';
@@ -176,7 +177,9 @@ class SettingPage extends StatelessWidget {
                       children: [
                         16.0.height,
                         cardSetting(
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(() => TambahAdminPage());
+                            },
                             icon: const Icon(
                               Icons.person_add,
                               color: Colors.green,
