@@ -8,6 +8,7 @@ import 'package:aplikasi_pendaftaran_siswa/views/pages/jadwal_pendaftaran/jadwal
 import 'package:aplikasi_pendaftaran_siswa/views/pages/pendaftaran/pendaftaran_siswa_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/profil_sekolah_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/setting/setting_page.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/waktu_pendaftaran_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_card_home.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_news_list.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -87,13 +88,11 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                            showDialog(
+                                context: context,
                                 builder: (context) =>
-                                    PendaftaranSiswaBaruPage(),
-                              ),
-                            );
+                                    const WaktuPendaftaranAlert());
+                            Get.to(() => PendaftaranSiswaBaruPage());
                           },
                           image: AppImages.register,
                           title: 'Pendaftaran\nSiswa baru',
@@ -101,12 +100,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DaftarCalonSiswaPage(),
-                              ),
-                            );
+                            Get.to(() => const DaftarCalonSiswaPage());
                           },
                           image: AppImages.student,
                           title: 'Daftar\nCalon Siswa',
@@ -114,13 +108,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const JadwalPendaftaranPage(),
-                              ),
-                            );
+                            Get.to(() => const JadwalPendaftaranPage());
                           },
                           image: AppImages.schedule,
                           title: 'Jadwal\nPendaftaran',
@@ -128,12 +116,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ProfilSekolahPage(),
-                              ),
-                            );
+                            Get.to(() => const ProfilSekolahPage());
                           },
                           image: AppImages.school,
                           title: 'Profil Sekolah',
@@ -151,12 +134,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SettingPage(),
-                              ),
-                            );
+                            Get.to(() => SettingPage());
                           },
                           image: AppImages.setting,
                           title: 'Pengaturan',
@@ -173,12 +151,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 176.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DaftarCalonSiswaPage(),
-                              ),
-                            );
+                            Get.to(() => const DaftarCalonSiswaPage());
                           },
                           image: AppImages.student,
                           title: 'Daftar\nCalon Siswa',
@@ -186,13 +159,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 176.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                               JadwalPendaftaranAdminPage(),
-                              ),
-                            );
+                            Get.to(() => JadwalPendaftaranAdminPage());
                           },
                           image: AppImages.schedule,
                           title: 'Jadwal\nPendaftaran',
@@ -200,12 +167,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 176.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ProfilSekolahPage(),
-                              ),
-                            );
+                            Get.to(() => const ProfilSekolahPage());
                           },
                           image: AppImages.school,
                           title: 'Profil Sekolah',
@@ -213,12 +175,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 176.w,
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SettingPage(),
-                              ),
-                            );
+                            Get.to(() => SettingPage());
                           },
                           image: AppImages.setting,
                           title: 'Pengaturan',
