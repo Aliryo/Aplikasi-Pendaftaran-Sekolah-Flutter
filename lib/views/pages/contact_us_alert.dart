@@ -3,6 +3,7 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsAlert extends StatelessWidget {
   const ContactUsAlert({super.key});
@@ -72,20 +73,26 @@ class ContactUsAlert extends StatelessWidget {
               ),
               16.0.width,
               Flexible(
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  child: const Text(
-                    'Hubungi Kami',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                child: GestureDetector(
+                  onTap: () async {
+                    Uri url = Uri.parse("https://wa.me/6285864856605");
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: const Text(
+                      'Hubungi Kami',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
