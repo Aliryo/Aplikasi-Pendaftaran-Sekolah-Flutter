@@ -17,10 +17,11 @@ class AppImages {
   static const String profile1 = "assets/profile1.png";
 
   static const String step1 = "assets/ilus1.png";
-  static const String step2 = "assets/ilus2.png";
-  static const String step3 = "assets/ilus3.png";
+  static const String step3 = "assets/ilus2.png";
+  static const String step4 = "assets/ilus3.png";
 
   static const String camera = "assets/camera.png";
   static const String bocil = "assets/bocil.png";
   static const String briIcon = "assets/bri.png";
+  static const String step2 = "assets/pengumuman.png";
 }

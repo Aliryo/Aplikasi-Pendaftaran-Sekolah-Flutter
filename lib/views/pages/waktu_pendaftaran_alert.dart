@@ -76,7 +76,7 @@ class WaktuPendaftaranAlert extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Get.close(1);
-                    Get.to(() => const JadwalPendaftaranPage());
+                    Get.to(() => JadwalPendaftaranPage());
                   },
                   child: Container(
                     width: double.infinity,

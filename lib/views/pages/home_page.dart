@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
+import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
@@ -21,6 +22,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final AuthController authController = Get.find();
+  final JadwalController jadwalController = Get.put(JadwalController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,11 +90,15 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    const WaktuPendaftaranAlert());
-                            Get.to(() => PendaftaranSiswaBaruPage());
+                            jadwalController.jadwals.first.beginAt!
+                                        .isBefore(DateTime.now()) ||
+                                    jadwalController.jadwals.first.beginAt!
+                                        .isAfter(DateTime.now())
+                                ? showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const WaktuPendaftaranAlert())
+                                : Get.to(() => PendaftaranSiswaBaruPage());
                           },
                           image: AppImages.register,
                           title: 'Pendaftaran\nSiswa baru',
@@ -108,7 +114,7 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            Get.to(() => const JadwalPendaftaranPage());
+                            Get.to(() => JadwalPendaftaranPage());
                           },
                           image: AppImages.schedule,
                           title: 'Jadwal\nPendaftaran',

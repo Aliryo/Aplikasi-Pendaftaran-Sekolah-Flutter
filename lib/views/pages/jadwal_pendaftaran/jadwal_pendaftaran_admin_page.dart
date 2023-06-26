@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 
 class JadwalPendaftaranAdminPage extends StatelessWidget {
   JadwalPendaftaranAdminPage({super.key});
-  final JadwalController controller = Get.put(JadwalController());
+  final JadwalController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     Widget cardJadwal(JadwalModel jadwal) {
@@ -100,14 +100,17 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
                         cardJadwal(controller.jadwals[index]),
                     itemCount: controller.jadwals.length,
                   )),
-                  controller.jadwals.length<4? WidgetButton(
-                    title: "Tambah Jadwal",
-                    onTap: () {
-                      controller.removeFase();
-                      Get.to(()=> TambahJadwal());},
-                    margin: EdgeInsets.only(
-                        bottom: 32.h, left: 24.w, right: 24.w, top: 16.h),
-                  ):const SizedBox()
+                  controller.jadwals.length < 4
+                      ? WidgetButton(
+                          title: "Tambah Jadwal",
+                          onTap: () {
+                            controller.removeFase();
+                            Get.to(() => TambahJadwal());
+                          },
+                          margin: EdgeInsets.only(
+                              bottom: 32.h, left: 24.w, right: 24.w, top: 16.h),
+                        )
+                      : const SizedBox()
                 ],
               );
       }),

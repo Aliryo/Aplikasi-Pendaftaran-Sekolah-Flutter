@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class JadwalController extends GetxController {
   var isLoading = false.obs;
   var isUpdateLodaing = false.obs;
-
+  var currentStep = 0.obs;
   var isAddLoading = false.obs;
   var jadwals = <JadwalModel>[].obs;
   var selectedJadwal = JadwalModel().obs;
@@ -30,6 +30,8 @@ class JadwalController extends GetxController {
     getJadwal();
     super.onInit();
   }
+
+  void changeStep(int index) => currentStep.value = index;
 
   void setJadwal(JadwalModel jadwal) {
     selectedJadwal.value = jadwal;
