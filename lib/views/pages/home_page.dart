@@ -155,7 +155,7 @@ class HomePage extends StatelessWidget {
                       spacing: 12.w,
                       children: [
                         WidgetCardHome(
-                          width: 176.w,
+                          width: 150.w,
                           onTap: () {
                             Get.to(() => const DaftarCalonSiswaPage());
                           },
@@ -163,7 +163,7 @@ class HomePage extends StatelessWidget {
                           title: 'Daftar\nCalon Siswa',
                         ),
                         WidgetCardHome(
-                          width: 176.w,
+                          width: 150.w,
                           onTap: () {
                             Get.to(() => JadwalPendaftaranAdminPage());
                           },
@@ -171,7 +171,7 @@ class HomePage extends StatelessWidget {
                           title: 'Jadwal\nPendaftaran',
                         ),
                         WidgetCardHome(
-                          width: 176.w,
+                          width: 150.w,
                           onTap: () {
                             Get.to(() => const ProfilSekolahPage());
                           },
@@ -179,7 +179,7 @@ class HomePage extends StatelessWidget {
                           title: 'Profil Sekolah',
                         ),
                         WidgetCardHome(
-                          width: 176.w,
+                          width: 150.w,
                           onTap: () {
                             Get.to(() => SettingPage());
                           },
