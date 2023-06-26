@@ -23,9 +23,15 @@ class TambahAdminPage extends StatelessWidget {
                   Get.back();
                   controller.clearAddAdmin();
                 },
-                child: Icon(Icons.arrow_back_ios_new_rounded)),
+                child: const Icon(Icons.arrow_back_ios_new_rounded)),
             12.0.width,
-            Text('Tambah Admin Baru'),
+            const Text(
+              'Tambah Admin Baru',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ],
         ),
       ),
