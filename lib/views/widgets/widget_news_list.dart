@@ -20,13 +20,15 @@ class WidgetNewsList extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 8.h),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16.r),
             child: Image.asset(
               image,
+              fit: BoxFit.cover,
               width: 160.w,
+              height: 110.h,
             ),
           ),
           16.0.width,
@@ -49,6 +51,7 @@ class WidgetNewsList extends StatelessWidget {
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
+                4.0.height,
                 Text(
                   date,
                   style: const TextStyle(
