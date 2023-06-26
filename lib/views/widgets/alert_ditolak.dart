@@ -84,6 +84,7 @@ class AlertDitolak extends StatelessWidget {
                 onTap: () {
                   pendaftaranController.updatePendaftaran(
                       status: "Ditolak", id: id);
+                  Get.close(1);
                 },
                 title: 'Konfirmasi',
                 color: Colors.red,

@@ -4,6 +4,8 @@ import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -30,15 +32,24 @@ class DetailCalonSiswaPage extends StatelessWidget {
             ),
           ),
           8.0.height,
-          Container(
-            width: double.infinity,
-            height: 220.h,
-            padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: Colors.green),
+          GestureDetector(
+            onTap: () {
+              showImageViewer(
+                context,
+                Image.network(pendaftaran.aktaUrl ?? '').image,
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 220.h,
+              padding: EdgeInsets.all(12.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                border: Border.all(color: Colors.green),
+              ),
+              child:
+                  Image.network(pendaftaran.aktaUrl ?? '', fit: BoxFit.cover),
             ),
-            child: Image.network(pendaftaran.aktaUrl ?? '', fit: BoxFit.cover),
           ),
           16.0.height,
           Padding(
@@ -49,17 +60,25 @@ class DetailCalonSiswaPage extends StatelessWidget {
             ),
           ),
           8.0.height,
-          Container(
-            width: double.infinity,
-            height: 220.h,
-            padding: EdgeInsets.all(12.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: Colors.green),
-            ),
-            child: Image.network(
-              pendaftaran.pembayaranUrl ?? '',
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              showImageViewer(
+                context,
+                Image.network(pendaftaran.pembayaranUrl ?? '').image,
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 220.h,
+              padding: EdgeInsets.all(12.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                border: Border.all(color: Colors.green),
+              ),
+              child: Image.network(
+                pendaftaran.pembayaranUrl ?? '',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           if (pendaftaran.status == 'Diproses') 24.0.height,
@@ -128,11 +147,19 @@ class DetailCalonSiswaPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
         children: [
           Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
-              child: Image.network(
-                pendaftaran.selfieUrl ?? "",
-                width: 240.w,
+            child: GestureDetector(
+              onTap: () {
+                showImageViewer(
+                  context,
+                  Image.network(pendaftaran.selfieUrl ?? '').image,
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.r),
+                child: Image.network(
+                  pendaftaran.selfieUrl ?? "",
+                  width: 240.w,
+                ),
               ),
             ),
           ),
@@ -196,7 +223,24 @@ class DetailCalonSiswaPage extends StatelessWidget {
             ],
             border: TableBorder.all(width: 0, color: Colors.transparent),
           ),
-          authController.user.value.role == 'admin' ? admin() : user(),
+          FutureBuilder(
+            future: authController.getUser(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              var data = snapshot.data as QuerySnapshot;
+              var role = (data.docs[0]['role']);
+              if (snapshot.hasData) {
+                if (role == 'admin') {
+                  return admin();
+                } else {
+                  return user();
+                }
+              }
+              return user();
+            },
+          ),
         ],
       ),
     );
