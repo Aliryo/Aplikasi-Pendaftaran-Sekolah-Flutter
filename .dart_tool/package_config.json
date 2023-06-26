@@ -80,6 +80,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "easy_image_viewer",
+      "rootUri": "file:///Users/restu/.pub-cache/hosted/pub.dev/easy_image_viewer-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "email_validator",
       "rootUri": "file:///Users/restu/.pub-cache/hosted/pub.dev/email_validator-2.1.17",
       "packageUri": "lib/",
@@ -470,7 +476,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-26T04:01:39.707006Z",
+  "generated": "2023-06-26T06:40:08.549375Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }
