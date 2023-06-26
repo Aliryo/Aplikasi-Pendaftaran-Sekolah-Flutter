@@ -2,6 +2,7 @@ import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/setting/tambah_admin_page.dart.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_input_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -172,22 +173,36 @@ class SettingPage extends StatelessWidget {
                     color: Colors.green,
                   ),
                   title: "Ubah Password"),
-              authController.user.value.role == "admin"
-                  ? Column(
-                      children: [
-                        16.0.height,
-                        cardSetting(
-                            onTap: () {
-                              Get.to(() => TambahAdminPage());
-                            },
-                            icon: const Icon(
-                              Icons.person_add,
-                              color: Colors.green,
-                            ),
-                            title: "Tambah Admin"),
-                      ],
-                    )
-                  : const SizedBox(),
+              FutureBuilder(
+                future: authController.getUser(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  var data = snapshot.data as QuerySnapshot;
+                  var role = (data.docs[0]['role']);
+                  if (snapshot.hasData) {
+                    if (role == 'admin') {
+                      return Column(
+                        children: [
+                          16.0.height,
+                          cardSetting(
+                              onTap: () {},
+                              icon: const Icon(
+                                Icons.person_add,
+                                color: Colors.green,
+                              ),
+                              title: "Tambah Admin"),
+                        ],
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
               16.0.height,
               cardSetting(
                   onTap: () {
