@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aplikasi_pendaftaran_siswa">
    <application
-        android:label="aplikasi_pendaftaran_siswa"
+        android:label="Pendaftaran SDIP Baitussalam"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

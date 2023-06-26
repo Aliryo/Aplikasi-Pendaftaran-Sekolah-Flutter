@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/jadwal_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';

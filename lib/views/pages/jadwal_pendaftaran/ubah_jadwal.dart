@@ -24,7 +24,7 @@ class UbahJadwal extends StatelessWidget {
                 onTap: () {
                   Get.back();
                 },
-                child: Icon(Icons.arrow_back_ios_new_rounded)),
+                child: const Icon(Icons.arrow_back_ios_new_rounded)),
             12.0.width,
             const Text(
               'Ubah Jadwal',
