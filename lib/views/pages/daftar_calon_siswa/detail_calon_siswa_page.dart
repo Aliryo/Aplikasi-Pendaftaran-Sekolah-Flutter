@@ -62,35 +62,36 @@ class DetailCalonSiswaPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          24.0.height,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: WidgetButton(
-                  onTap: () {
-                    pendaftaranController.updatePendaftaran(
-                      id: pendaftaran.id ?? '',
-                      status: "Diterima",
-                    );
-                  },
-                  title: 'Terima',
-                ),
-              ),
-              16.0.width,
-              Expanded(
+          if (pendaftaran.status == 'Diproses') 24.0.height,
+          if (pendaftaran.status == 'Diproses')
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
                   child: WidgetButton(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          AlertDitolak(id: pendaftaran.id ?? ''));
-                },
-                title: 'Tolak',
-                color: Colors.redAccent,
-              )),
-            ],
-          )
+                    onTap: () {
+                      pendaftaranController.updatePendaftaran(
+                        id: pendaftaran.id ?? '',
+                        status: "Diterima",
+                      );
+                    },
+                    title: 'Terima',
+                  ),
+                ),
+                16.0.width,
+                Expanded(
+                    child: WidgetButton(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDitolak(id: pendaftaran.id ?? ''));
+                  },
+                  title: 'Tolak',
+                  color: Colors.redAccent,
+                )),
+              ],
+            )
         ],
       );
     }
@@ -102,8 +103,10 @@ class DetailCalonSiswaPage extends StatelessWidget {
           32.0.height,
           Text(
             pendaftaran.status == 'Diproses'
-                ? 'Pendaftaran sedang diproses, mohon ditunggu untuk pengumuman hasilnya'
-                : 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan',
+                ? 'Pendaftaran sedang diproses, mohon untuk menunggu pengumuman hasilnya'
+                : pendaftaran.status == 'Diterima'
+                    ? 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan'
+                    : 'Mohon maaf pendaftaran anda ditolak dikarenakan "${pendaftaran.descStatus}"',
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
@@ -180,7 +183,13 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     pendaftaran.status ?? '',
-                    style: const TextStyle(color: Colors.green),
+                    style: TextStyle(
+                      color: pendaftaran.status == 'Diproses'
+                          ? Colors.blue
+                          : pendaftaran.status == 'Diterima'
+                              ? Colors.green
+                              : Colors.red,
+                    ),
                   ),
                 )
               ]),
