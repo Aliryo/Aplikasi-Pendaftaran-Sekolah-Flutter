@@ -104,12 +104,23 @@ class JadwalPendaftaranAdminPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Jadwal Pendaftaran',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(Icons.arrow_back_ios_new_rounded)),
+            12.0.width,
+            const Text(
+              'Jadwal Pendaftaran',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ),
       body: Obx(() {

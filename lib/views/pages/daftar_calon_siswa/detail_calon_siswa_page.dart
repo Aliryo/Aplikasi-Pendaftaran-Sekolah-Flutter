@@ -140,12 +140,23 @@ class DetailCalonSiswaPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Detail Calon Siswa Baru',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(Icons.arrow_back_ios_new_rounded)),
+            12.0.width,
+            const Text(
+              'Detail Calon Siswa baru',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ),
       body: ListView(

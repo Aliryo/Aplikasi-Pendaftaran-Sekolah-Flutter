@@ -17,12 +17,23 @@ class TambahJadwal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Ubah Jadwal',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(Icons.arrow_back_ios_new_rounded)),
+            12.0.width,
+            const Text(
+              'Tambah Jadwal',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ),
       body: Obx(() {
@@ -30,7 +41,7 @@ class TambahJadwal extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           children: [
             24.0.height,
-            Text("Pay Method",
+            Text("Fase",
                 style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
             8.0.height,
             DropdownButtonFormField2(
@@ -55,7 +66,7 @@ class TambahJadwal extends StatelessWidget {
                   elevation: 2,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Colors.white)),
+                      color: Colors.blue[50])),
               buttonStyleData: ButtonStyleData(
                   height: 60.h,
                   width: double.infinity,

@@ -34,12 +34,14 @@ class SignInPage extends StatelessWidget {
                         ? "Email tidak boleh kosong"
                         : null,
                 controller: controller.emailLoginController,
+                onChanged: controller.onEmailLogin,
               ),
               WidgetInputText(
                 title: "Password",
                 hintText: "Masukan password anda",
                 validator: (value) =>
                     value == "" ? "Password tidak boleh kosong" : null,
+                onChanged: controller.onPasswordLogin,
                 icon: GestureDetector(
                     onTap: () => controller.changeHidePasswordLogin(),
                     child: Icon(
@@ -53,6 +55,7 @@ class SignInPage extends StatelessWidget {
               ),
               16.0.height,
               WidgetButton(
+                disable: controller.isLoginDisable.value,
                 loading: controller.isLoginLoading.value,
                 onTap: () {
                   controller.login();

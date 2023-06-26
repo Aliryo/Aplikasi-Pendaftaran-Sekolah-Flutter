@@ -3,6 +3,7 @@ import 'package:aplikasi_pendaftaran_siswa/services/auth_services.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/home_page.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/sign_in_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,9 @@ class AuthController extends GetxController {
   final confirmAdminContoller = TextEditingController();
 
   var isRegisterLoading = false.obs;
+  var isLoginDisable = true.obs;
+  var isAdminDisable = true.obs;
+  var isRegisterDisable = true.obs;
   var isLoginLoading = false.obs;
   var isAddAdminLoading = false.obs;
   var hidePasswordRegister = true.obs;
@@ -73,6 +77,80 @@ class AuthController extends GetxController {
     passwordLoginController.clear();
   }
 
+  onEmailLogin(String value) {
+    validateLogin();
+  }
+
+  onPasswordLogin(String value) {
+    validateLogin();
+  }
+
+  validateLogin() {
+    if (emailLoginController.text != '' &&
+        passwordLoginController.text != '' &&
+        EmailValidator.validate(emailLoginController.text)) {
+      isLoginDisable.value = false;
+    } else {
+      isLoginDisable.value = true;
+    }
+  }
+
+  onEmailRegister(String value) {
+    validateRegister();
+  }
+
+  onPasswordRegister(String value) {
+    validateRegister();
+  }
+
+  onConfirmPasswordRegister(String value) {
+    validateRegister();
+  }
+
+  onNameRegister(String value) {
+    validateRegister();
+  }
+
+  validateRegister() {
+    if (emailController.text != '' &&
+        passwordController.text != '' &&
+        nameController.text != '' &&
+        confirmController.text == passwordController.text &&
+        EmailValidator.validate(emailController.text)) {
+      isRegisterDisable.value = false;
+    } else {
+      isRegisterDisable.value = true;
+    }
+  }
+
+  onEmailAdmin(String value) {
+    validateAdmin();
+  }
+
+  onPasswordAdmin(String value) {
+    validateAdmin();
+  }
+
+  onConfirmPasswordAdmin(String value) {
+    validateAdmin();
+  }
+
+  onNameAdmin(String value) {
+    validateAdmin();
+  }
+
+  validateAdmin() {
+    if (emailAdminController.text != '' &&
+        passwordAdminController.text != '' &&
+        nameAdminController.text != '' &&
+        confirmAdminContoller.text == passwordAdminController.text &&
+        EmailValidator.validate(emailAdminController.text)) {
+      isAdminDisable.value = false;
+    } else {
+      isAdminDisable.value = true;
+    }
+  }
+
   Future<void> addAdmin() async {
     try {
       if (addAdminKey.currentState != null) {
@@ -90,7 +168,7 @@ class AuthController extends GetxController {
         }
       }
     } catch (e) {
-      clearAddAdmin();
+      isRegisterLoading.value = false;
       Get.snackbar("Gagal", "Mohon Periksa Data Kembali",
           backgroundColor: Colors.redAccent, colorText: Colors.white);
       throw Exception(e.toString());
@@ -136,7 +214,7 @@ class AuthController extends GetxController {
         }
       }
     } catch (e) {
-      clearLogin();
+      isLoginLoading.value = false;
       Get.snackbar("Gagal", "Email atau password salah",
           backgroundColor: Colors.red, colorText: Colors.white);
       throw Exception(e.toString());

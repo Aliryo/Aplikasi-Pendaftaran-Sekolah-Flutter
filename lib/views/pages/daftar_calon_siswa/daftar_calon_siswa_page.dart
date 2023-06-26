@@ -26,12 +26,23 @@ class _DaftarCalonSiswaPageState extends State<DaftarCalonSiswaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Daftar Calon Siswa Baru',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(Icons.arrow_back_ios_new_rounded)),
+              12.0.width,
+              const Text(
+                'Daftar Calon Siswa Baru',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
         body: Obx(() {

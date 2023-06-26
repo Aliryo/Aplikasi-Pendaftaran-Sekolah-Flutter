@@ -29,12 +29,14 @@ class SignUpPage extends StatelessWidget {
               WidgetInputText(
                 title: "Nama",
                 hintText: "Masukan nama anda",
+                onChanged: controller.onNameRegister,
                 validator: (value) =>
                     value == "" ? "Nama tidak boleh kosong" : null,
                 controller: controller.nameController,
               ),
               WidgetInputText(
                 title: "Email",
+                onChanged: controller.onEmailRegister,
                 hintText: "Masukan email anda",
                 validator: (value) => !EmailValidator.validate(value ?? '')
                     ? "Format email tidak sesuai"
@@ -45,6 +47,7 @@ class SignUpPage extends StatelessWidget {
               ),
               WidgetInputText(
                 title: "Password",
+                onChanged: controller.onPasswordRegister,
                 hintText: "Masukan password anda",
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 6) {
@@ -66,6 +69,7 @@ class SignUpPage extends StatelessWidget {
               WidgetInputText(
                 title: "Konfirmasi Password",
                 hintText: "Masukan password anda",
+                onChanged: controller.onConfirmPasswordRegister,
                 validator: (value) =>
                     value != controller.passwordController.text
                         ? "Password tidak sama"
@@ -86,6 +90,7 @@ class SignUpPage extends StatelessWidget {
               16.0.height,
               WidgetButton(
                 loading: controller.isRegisterLoading.value,
+                disable: controller.isRegisterDisable.value,
                 onTap: () {
                   controller.register();
                 },
