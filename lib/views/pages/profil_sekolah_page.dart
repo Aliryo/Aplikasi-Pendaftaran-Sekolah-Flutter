@@ -35,8 +35,8 @@ class ProfilSekolahPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
         children: [
           Image.asset(
-            AppImages.splash,
-            height: 80.w,
+            AppImages.logo,
+            height: 100.w,
           ),
           16.0.height,
           const Center(

@@ -205,7 +205,18 @@ class HomePage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.r),
                   child: Image.asset(
-                    AppImages.kegiatan,
+                    AppImages.kegiatan1,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(
+                    AppImages.kegiatan2,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -220,13 +231,6 @@ class HomePage extends StatelessWidget {
               onPageChanged: (index, reason) {},
             ),
           ),
-          4.0.height,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              indicator(1),
-            ],
-          ),
           16.0.height,
           const Text(
             'Berita Sekolah',
@@ -238,30 +242,19 @@ class HomePage extends StatelessWidget {
           16.0.height,
           const WidgetNewsList(
             image: AppImages.berita1,
-            title: 'Acara halal bihalal setelah Idul Fitri',
+            title: 'Tasmi',
             subtitle:
-                'Setelah libur lebaran idul fitri selesai, sekolah mengadakan acara halal bihalal antara guru dan murid, sebagai bentuk pengajaran pendidikan.',
-            date: 'Senin, 27 April 2023',
+                'Tasmi Juz 29 & 30 SDIP Baitussalam Tahun Pelajaran 2022/2023.',
+            date: 'Jumat, 28 April 2023',
           ),
           const WidgetNewsList(
             image: AppImages.berita2,
-            title: 'Persipan lomba pesta siaga',
-            subtitle:
-                'Dalam rangka menyambut perlombaan persta siaga antar SD di kecamatan tembalang, semarang, siswa mengadakan latihan kegiatan.',
-            date: 'Senin, 26 April 2023',
+            title: 'Mabit',
+            subtitle: 'Mabit (Malam Bina Iman dan Taqwa) SDIP Baitussalam.',
+            date: 'Kamis, 5 Januari 2023',
           ),
         ],
       ),
-    );
-  }
-
-  Widget indicator(int index) {
-    return Container(
-      width: 40.w,
-      height: 8.h,
-      margin: EdgeInsets.symmetric(horizontal: 2.w),
-      decoration: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(3.w)),
     );
   }
 }
