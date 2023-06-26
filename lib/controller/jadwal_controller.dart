@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class JadwalController extends GetxController {
   var isLoading = false.obs;
   var isUpdateLodaing = false.obs;
+  var isAddDisable = true.obs;
   var currentStep = 0.obs;
   var isAddLoading = false.obs;
   var jadwals = <JadwalModel>[].obs;
@@ -23,7 +24,7 @@ class JadwalController extends GetxController {
   var judulAddController = TextEditingController();
   var deskripsiAddController = TextEditingController();
   List<int> listFase = [1, 2, 3, 4];
-  var fase = 1.obs;
+  var fase = 0.obs;
 
   @override
   void onInit() {
@@ -41,7 +42,18 @@ class JadwalController extends GetxController {
     deskripsiController.text = jadwal.deskripsi ?? '';
   }
 
-  setSelectedFase(int index) => fase.value = index;
+  setSelectedFase(int index) {
+    fase.value = index;
+    validateDisable();
+  }
+
+  onJudulChange(String value) {
+    validateDisable();
+  }
+
+  onDeskripsiChange(String value) {
+    validateDisable();
+  }
 
   setStartDate(DateTime value) => startdate.value = value;
   setEndDate(DateTime value) => endDate.value = value;
@@ -60,6 +72,28 @@ class JadwalController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
+    }
+  }
+
+  validateDisable() {
+    if (fase.value != 0 &&
+        judulAddController.text != '' &&
+        deskripsiAddController.text != '') {
+      isAddDisable.value = false;
+    } else {
+      isAddDisable.value = true;
+    }
+  }
+
+  Future<void> deleteJadwal(String id) async {
+    try {
+      await JadwalService().deleteJadwal(id);
+      getJadwal();
+      Get.snackbar("Succes", "Berhasil Menghapus Jadwal",
+          backgroundColor: Colors.blue, colorText: Colors.white);
+    } catch (e) {
+      Get.snackbar("Gagal", "Gagal Menghapus jadwal",
+          backgroundColor: Colors.red, colorText: Colors.white);
     }
   }
 
@@ -104,6 +138,11 @@ class JadwalController extends GetxController {
       Get.snackbar("Succes", "Berhasil mengubah jadwal",
           backgroundColor: Colors.blue, colorText: Colors.white);
       Get.close(1);
+      judulAddController.clear();
+      deskripsiAddController.clear();
+      tanggalMulai.value =
+          DateTime.now().subtract(Duration(days: DateTime.now().day - 1));
+      tanggalSelesai.value = DateTime.now();
       isAddLoading.value = false;
     } catch (e) {
       Get.snackbar("Gagal", "Gagal menambahkan jadwal",

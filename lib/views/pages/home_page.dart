@@ -1,5 +1,6 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
+import 'package:aplikasi_pendaftaran_siswa/data/model/jadwal_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/contact_us_alert.dart';
@@ -90,10 +91,10 @@ class HomePage extends StatelessWidget {
                         WidgetCardHome(
                           width: 112.w,
                           onTap: () {
-                            jadwalController.jadwals.first.beginAt!
-                                        .isBefore(DateTime.now()) ||
-                                    jadwalController.jadwals.first.beginAt!
-                                        .isAfter(DateTime.now())
+                            DateTime.now().isBefore(jadwalController
+                                        .jadwals.first.beginAt!) ||
+                                    DateTime.now().isAfter(
+                                        jadwalController.jadwals.first.endAt!)
                                 ? showDialog(
                                     context: context,
                                     builder: (context) =>

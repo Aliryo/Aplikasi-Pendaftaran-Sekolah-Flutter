@@ -88,6 +88,7 @@ class TambahJadwal extends StatelessWidget {
               title: "Judul",
               hintText: "Masukan judul jadwal",
               controller: controller.judulAddController,
+              onChanged: controller.onJudulChange,
             ),
             controller.fase.value == 2 || controller.fase.value == 4
                 ? Column(
@@ -175,8 +176,8 @@ class TambahJadwal extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        DateFormat("dd MMM yyyy")
-                                            .format(DateTime.now()),
+                                        DateFormat("dd MMM yyyy").format(
+                                            controller.tanggalMulai.value),
                                       ),
                                       Icon(
                                         Icons.calendar_month_rounded,
@@ -225,8 +226,8 @@ class TambahJadwal extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        DateFormat("dd MMM yyyy")
-                                            .format(DateTime.now()),
+                                        DateFormat("dd MMM yyyy").format(
+                                            controller.tanggalSelesai.value),
                                       ),
                                       Icon(
                                         Icons.calendar_month_rounded,
@@ -245,11 +246,13 @@ class TambahJadwal extends StatelessWidget {
               controller: controller.deskripsiAddController,
               title: "Deskripsi",
               hintText: "Masukan Deskripsi",
+              onChanged: controller.onDeskripsiChange,
               maxLine: 5,
             ),
             16.0.height,
             WidgetButton(
-              loading:controller.isAddLoading.value,
+                disable: controller.isAddDisable.value,
+                loading: controller.isAddLoading.value,
                 title: "Tambah",
                 onTap: () {
                   controller.addJadwal();

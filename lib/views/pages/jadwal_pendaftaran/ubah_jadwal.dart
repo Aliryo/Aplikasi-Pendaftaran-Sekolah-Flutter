@@ -121,7 +121,7 @@ class UbahJadwal extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                DateFormat("dd-MM-yyyy")
+                                DateFormat("dd MMMM yyyy")
                                     .format(controller.startdate.value),
                               ),
                               Icon(
@@ -172,7 +172,7 @@ class UbahJadwal extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        DateFormat("dd-MM-yyyy")
+                                        DateFormat("dd MMMM yyyy")
                                             .format(controller.startdate.value),
                                       ),
                                       Icon(
@@ -220,7 +220,7 @@ class UbahJadwal extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        DateFormat("dd-MM-yyyy")
+                                        DateFormat("dd MMMM yyyy")
                                             .format(controller.endDate.value),
                                       ),
                                       Icon(

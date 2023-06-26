@@ -1,5 +1,4 @@
 import 'package:aplikasi_pendaftaran_siswa/data/model/jadwal_model.dart';
-import 'package:aplikasi_pendaftaran_siswa/data/src/app_images.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/helper.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
@@ -69,7 +68,7 @@ class JadwalPendaftaranPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${DateFormat("dd MMMM yyyy").format(jadwal.beginAt ?? DateTime.now())} - ${DateFormat("dd MMMM yyyy").format(jadwal.beginAt ?? DateTime.now())}",
+                        "${DateFormat("dd MMMM yyyy").format(jadwal.beginAt ?? DateTime.now())} - ${DateFormat("dd MMMM yyyy").format(jadwal.endAt ?? DateTime.now())}",
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,

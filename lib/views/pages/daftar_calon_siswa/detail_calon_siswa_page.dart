@@ -1,4 +1,5 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
+import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
@@ -15,6 +16,7 @@ class DetailCalonSiswaPage extends StatelessWidget {
   DetailCalonSiswaPage({super.key, required this.pendaftaran});
   final AuthController authController = Get.find();
   final PendaftaranController pendaftaranController = Get.find();
+  final JadwalController jadwalController = Get.find();
   final PendaftaranModel pendaftaran;
 
   @override
@@ -116,21 +118,24 @@ class DetailCalonSiswaPage extends StatelessWidget {
     }
 
     Widget user() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          32.0.height,
-          Text(
-            pendaftaran.status == 'Diproses'
-                ? 'Pendaftaran sedang diproses, mohon untuk menunggu pengumuman hasilnya'
-                : pendaftaran.status == 'Diterima'
-                    ? 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan'
-                    : 'Mohon maaf pendaftaran anda ditolak dikarenakan "${pendaftaran.descStatus}"',
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-        ],
-      );
+      return Obx(() {
+        return DateTime.now().isAfter(jadwalController.jadwals[1].beginAt!)
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  32.0.height,
+                  Text(
+                    pendaftaran.status == 'diterima'
+                        ? 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan'
+                        : "Mohon maaf  anak anda dinyatakan lolos seleksi dikarenakan ${pendaftaran.descStatus}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              )
+            : const SizedBox();
+      });
     }
 
     return Scaffold(
