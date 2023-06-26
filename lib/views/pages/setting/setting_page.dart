@@ -187,7 +187,9 @@ class SettingPage extends StatelessWidget {
                         children: [
                           16.0.height,
                           cardSetting(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(() => TambahAdminPage());
+                              },
                               icon: const Icon(
                                 Icons.person_add,
                                 color: Colors.green,
