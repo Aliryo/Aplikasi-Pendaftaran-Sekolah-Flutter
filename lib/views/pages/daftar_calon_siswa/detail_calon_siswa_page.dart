@@ -217,25 +217,61 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   child: Text(pendaftaran.alamat ?? ''),
                 )
               ]),
-              TableRow(children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Status'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    pendaftaran.status ?? '',
-                    style: TextStyle(
-                      color: pendaftaran.status == 'Diproses'
-                          ? Colors.blue
-                          : pendaftaran.status == 'Diterima'
-                              ? Colors.green
-                              : Colors.red,
-                    ),
-                  ),
-                )
-              ]),
+              TableRow(
+                  children: authController.user.value.role == "admin"
+                      ? [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Status'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              pendaftaran.status ?? '',
+                              style: TextStyle(
+                                color: pendaftaran.status == 'Diproses'
+                                    ? Colors.blue
+                                    : pendaftaran.status == 'Diterima'
+                                        ? Colors.green
+                                        : Colors.red,
+                              ),
+                            ),
+                          )
+                        ]
+                      : (authController.user.value.role == "member" &&
+                              DateTime.now().isAfter(
+                                  jadwalController.jadwals[1].beginAt!))
+                          ? [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text('Status'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  pendaftaran.status ?? '',
+                                  style: TextStyle(
+                                    color: pendaftaran.status == 'Diproses'
+                                        ? Colors.blue
+                                        : pendaftaran.status == 'Diterima'
+                                            ? Colors.green
+                                            : Colors.red,
+                                  ),
+                                ),
+                              )
+                            ]
+                          : [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(''),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  '',
+                                ),
+                              )
+                            ]),
             ],
             border: TableBorder.all(width: 0, color: Colors.transparent),
           ),
