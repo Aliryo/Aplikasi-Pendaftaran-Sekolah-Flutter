@@ -127,7 +127,9 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   Text(
                     pendaftaran.status == 'Diterima'
                         ? 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan'
-                        : "Mohon maaf  anak anda dinyatakan lolos seleksi dikarenakan ${pendaftaran.descStatus}",
+                        : pendaftaran.status == 'Ditolak'
+                            ? "Mohon maaf  anak anda dinyatakan lolos seleksi dikarenakan ${pendaftaran.descStatus}"
+                            : 'Status pendaftaran Anda masih Diproses, Mohon untuk menunggu hasilnya',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w500),
