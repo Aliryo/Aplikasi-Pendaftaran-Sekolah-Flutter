@@ -1,3 +1,4 @@
+import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/widget_daftar_calon.dart';
@@ -15,10 +16,13 @@ class DaftarCalonSiswaPage extends StatefulWidget {
 class _DaftarCalonSiswaPageState extends State<DaftarCalonSiswaPage> {
   final PendaftaranController pendaftaranController =
       Get.isRegistered() ? Get.find() : Get.put(PendaftaranController());
+  final AuthController authController = Get.find();
 
   @override
   void initState() {
-    pendaftaranController.getListPendaftaran();
+    authController.user.value.role == 'admin'
+        ? pendaftaranController.getListPendaftaran()
+        : pendaftaranController.getListPendaftaranUser();
     super.initState();
   }
 

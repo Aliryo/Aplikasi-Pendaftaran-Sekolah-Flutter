@@ -80,4 +80,22 @@ class PendaftaranService {
       rethrow;
     }
   }
+
+  Future<List<PendaftaranModel>> getPendaftaransUser() async {
+    try {
+      QuerySnapshot result =
+          await _pendaftaran.where('userId', isEqualTo: _uid).get();
+
+      List<PendaftaranModel> pendaftarans = result.docs
+          .map(
+            (e) => PendaftaranModel.fromJson(e.data() as Map<String, dynamic>)
+                .copyWith(id: e.id),
+          )
+          .toList();
+
+      return pendaftarans;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

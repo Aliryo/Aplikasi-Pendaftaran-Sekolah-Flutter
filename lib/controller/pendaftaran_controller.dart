@@ -106,6 +106,19 @@ class PendaftaranController extends GetxController {
     }
   }
 
+  Future<void> getListPendaftaranUser() async {
+    try {
+      listPendaftaran.clear();
+      isGetLoading.value = true;
+      var data = await PendaftaranService().getPendaftaransUser();
+      listPendaftaran.assignAll(data);
+      log("Data Pendaftaran => ${listPendaftaran.first.id}");
+      isGetLoading.value = false;
+    } catch (e) {
+      isGetLoading.value = false;
+    }
+  }
+
   Future addPendaftarBaru() async {
     try {
       isPendaftaranLoading.value = true;

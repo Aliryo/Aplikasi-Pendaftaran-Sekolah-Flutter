@@ -109,7 +109,7 @@ class HomePage extends StatelessWidget {
                             Get.to(() => const DaftarCalonSiswaPage());
                           },
                           image: AppImages.student,
-                          title: 'Daftar\nCalon Siswa',
+                          title: 'Lihat\nPendaftaran',
                         ),
                         WidgetCardHome(
                           width: 112.w,
