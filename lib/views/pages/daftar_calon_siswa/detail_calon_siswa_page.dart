@@ -83,36 +83,45 @@ class DetailCalonSiswaPage extends StatelessWidget {
               ),
             ),
           ),
-          if (pendaftaran.status == 'Diproses') 24.0.height,
-          if (pendaftaran.status == 'Diproses')
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: WidgetButton(
-                    onTap: () {
-                      pendaftaranController.updatePendaftaran(
-                        id: pendaftaran.id ?? '',
-                        status: "Diterima",
-                      );
-                    },
-                    title: 'Terima',
-                  ),
+          24.0.height,
+          (pendaftaran.status == 'Ditolak' || pendaftaran.status == 'Lulus')
+              ? const SizedBox()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: WidgetButton(
+                        onTap: () {
+                          if (pendaftaran.status == 'Diterima') {
+                            pendaftaranController.updatePendaftaran(
+                              id: pendaftaran.id ?? '',
+                              status: "Lulus",
+                            );
+                          } else {
+                            pendaftaranController.updatePendaftaran(
+                              id: pendaftaran.id ?? '',
+                              status: "Diterima",
+                            );
+                          }
+                        },
+                        title: 'Terima',
+                      ),
+                    ),
+                    16.0.width,
+                    Expanded(
+                        child: WidgetButton(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                AlertDitolak(id: pendaftaran.id ?? ''));
+                      },
+                      title: 'Tolak',
+                      color: Colors.redAccent,
+                    )),
+                  ],
                 ),
-                16.0.width,
-                Expanded(
-                    child: WidgetButton(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) =>
-                            AlertDitolak(id: pendaftaran.id ?? ''));
-                  },
-                  title: 'Tolak',
-                  color: Colors.redAccent,
-                )),
-              ],
-            )
+          16.0.height,
         ],
       );
     }
@@ -126,10 +135,12 @@ class DetailCalonSiswaPage extends StatelessWidget {
                   32.0.height,
                   Text(
                     pendaftaran.status == 'Diterima'
-                        ? 'Selamat anak anda dinyatakan lolos seleksi dan diterima sebagai siswa dari SDIP Baitussalam Kuningan'
+                        ? 'Selamat anda dinyatakan lolos sebagai calon siswa di SDIP Baitussalam Kuningan'
                         : pendaftaran.status == 'Ditolak'
-                            ? "Mohon maaf  anak anda dinyatakan lolos seleksi dikarenakan ${pendaftaran.descStatus}"
-                            : 'Status pendaftaran Anda masih Diproses, Mohon untuk menunggu hasilnya',
+                            ? "Mohon maaf anda dinyatakan tidak lolos seleksi dikarenakan ${pendaftaran.descStatus}"
+                            : pendaftaran.status == 'Diproses'
+                                ? 'Status pendaftaran Anda masih Diproses, Mohon untuk menunggu hasilnya'
+                                : 'Selamat anda dinyatakan lulus menjadi siswa baru di SDIP Baitussalam Kuningan',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w500),
@@ -233,9 +244,9 @@ class DetailCalonSiswaPage extends StatelessWidget {
                               style: TextStyle(
                                 color: pendaftaran.status == 'Diproses'
                                     ? Colors.blue
-                                    : pendaftaran.status == 'Diterima'
-                                        ? Colors.green
-                                        : Colors.red,
+                                    : pendaftaran.status == 'Ditolak'
+                                        ? Colors.red
+                                        : Colors.green,
                               ),
                             ),
                           )
@@ -255,9 +266,9 @@ class DetailCalonSiswaPage extends StatelessWidget {
                                   style: TextStyle(
                                     color: pendaftaran.status == 'Diproses'
                                         ? Colors.blue
-                                        : pendaftaran.status == 'Diterima'
-                                            ? Colors.green
-                                            : Colors.red,
+                                        : pendaftaran.status == 'Ditolak'
+                                            ? Colors.red
+                                            : Colors.green,
                                   ),
                                 ),
                               )
