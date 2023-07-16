@@ -16,7 +16,6 @@ class JadwalPendaftaranPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     Widget step(JadwalModel jadwal) {
       return SingleChildScrollView(
         child: Column(
@@ -98,9 +97,6 @@ class JadwalPendaftaranPage extends StatelessWidget {
       );
     }
 
-=======
-    int currentStep = 1;
->>>>>>> 7e2a6cf (fix version)
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
