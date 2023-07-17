@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/services/pendaftaran_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class PendaftaranController extends GetxController {
   final namaLengkapController = TextEditingController();
@@ -176,6 +182,172 @@ class PendaftaranController extends GetxController {
     } catch (e) {
       isUpdateLoading.value = false;
     }
+  }
+
+  Future<Uint8List> makePdf(PendaftaranModel pendaftaran, String color) async {
+    final pdf = pw.Document();
+    // final imageLogo = NetworkImage(pendaftaran.selfieUrl??'');
+    Uint8List profile =
+        (await NetworkAssetBundle(Uri.parse(pendaftaran.selfieUrl ?? ''))
+                .load(pendaftaran.selfieUrl ?? ''))
+            .buffer
+            .asUint8List();
+
+    var dataImage = await rootBundle.load('assets/apklogo.jpg');
+    var myImage = dataImage.buffer.asUint8List();
+    pdf.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a6,
+      build: (context) {
+        return pw.Column(children: [
+          pw.Row(children: [
+            pw.Expanded(
+                child: pw.Column(children: [
+              pw.Text(
+                'SDIP Baitussalam Kuningan',
+                style: pw.TextStyle(
+                  fontSize: 14,
+                  fontWeight: pw.FontWeight.normal,
+                ),
+              ),
+              pw.SizedBox(height: 4.h),
+              pw.Text(
+                'Jl. Blok Cikedung, Kelurahan Cirendang, Kecamatan Kuningan, Kabupaten Kuningan',
+                textAlign: pw.TextAlign.center,
+                style: pw.TextStyle(fontSize: 10.sp, color: PdfColors.grey800),
+              ),
+            ])),
+            pw.SizedBox(width: 8.w),
+            pw.SizedBox(
+                width: 42.w,
+                height: 42.w,
+                child: pw.Image(pw.MemoryImage(myImage)))
+          ]),
+          pw.Divider(thickness: 1),
+          pw.SizedBox(height: 8.h),
+          pw.SizedBox(
+              height: 150.h,
+              width: 110.w,
+              child: pw.ClipRRect(
+                  horizontalRadius: 10.r,
+                  verticalRadius: 10.r,
+                  child:
+                      pw.Image(pw.MemoryImage(profile), fit: pw.BoxFit.cover))),
+          pw.SizedBox(height: 16.h),
+          pw.Table(
+            columnWidths: {
+              0: pw.FixedColumnWidth(120.w),
+              1: const pw.FlexColumnWidth(),
+            },
+            children: [
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('ID Pendaftaran',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text((pendaftaran.id ?? '').capitalize!,
+                      style: pw.TextStyle(
+                          fontSize: 12.sp,
+                          color: PdfColors.black,
+                          fontWeight: pw.FontWeight.normal)),
+                )
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('Nama',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text((pendaftaran.namaLengkap ?? '').capitalize!,
+                      style: pw.TextStyle(
+                          fontSize: 12.sp,
+                          color: PdfColors.black,
+                          fontWeight: pw.FontWeight.normal)),
+                )
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('Tanggal Lahir',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text(DateFormat("dd MMMM yyyy")
+                      .format(pendaftaran.tanggalLahir ?? DateTime.now()),
+                      style: pw.TextStyle(
+                          fontSize: 12.sp,
+                          color: PdfColors.black,
+                          fontWeight: pw.FontWeight.normal)),
+                )
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('Tempat Lahir',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child:
+                      pw.Text("${(pendaftaran.tempatLahir ?? '').capitalize}",
+                      style: pw.TextStyle(
+                          fontSize: 12.sp,
+                          color: PdfColors.black,
+                          fontWeight: pw.FontWeight.normal)),
+                )
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('Alamat',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text(pendaftaran.alamat ?? '',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp,
+                          color: PdfColors.black,
+                          fontWeight: pw.FontWeight.normal)),
+                )
+              ]),
+              pw.TableRow(children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text('Status',
+                      style: pw.TextStyle(
+                          fontSize: 12.sp, color: PdfColors.grey800)),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.symmetric(vertical: 6.h),
+                  child: pw.Text(
+                    pendaftaran.status ?? '',
+                    style: pw.TextStyle(fontSize: 12.sp,
+                        color: PdfColor.fromHex(color),
+                        fontWeight: pw.FontWeight.normal),
+                  ),
+                )
+              ])
+            ],
+          ),
+        ]);
+      },
+    ));
+    final output = await getTemporaryDirectory();
+    final file = File('${output.path}/${pendaftaran.id}.pdf');
+    await file.writeAsBytes(await pdf.save());
+
+    return pdf.save();
   }
 
   @override

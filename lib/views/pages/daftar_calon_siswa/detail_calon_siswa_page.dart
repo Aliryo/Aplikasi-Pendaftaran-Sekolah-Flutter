@@ -3,6 +3,7 @@ import 'package:aplikasi_pendaftaran_siswa/controller/jadwal_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/pdf_preview.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/alert_ditolak.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/widgets/widget_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -145,6 +146,7 @@ class DetailCalonSiswaPage extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w500),
                   ),
+                WidgetButton(title: "Cetak", onTap: (){Get.to(()=>PdfPreviewPage(pendaftaran: pendaftaran,controller: pendaftaranController,));}, margin: EdgeInsets.symmetric(vertical: 36.h),)
                 ],
               )
             : const SizedBox();
@@ -212,12 +214,22 @@ class DetailCalonSiswaPage extends StatelessWidget {
               TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.r),
-                  child: const Text('Tempat Tanggal Lahir'),
+                  child: const Text('Tanggal Lahir'),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.r),
                   child: Text(
-                      "${(pendaftaran.tempatLahir ?? '').capitalize}, ${DateFormat("dd MMMM yyyy").format(pendaftaran.tanggalLahir ?? DateTime.now())}"),
+                      DateFormat("dd MMMM yyyy").format(pendaftaran.tanggalLahir ?? DateTime.now())),
+                )
+              ]),TableRow(children: [
+                Padding(
+                  padding: EdgeInsets.all(8.r),
+                  child: const Text('Tempat Lahir'),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.r),
+                  child: Text(
+                      "${(pendaftaran.tempatLahir ?? '').capitalize}"),
                 )
               ]),
               TableRow(children: [
