@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:aplikasi_pendaftaran_siswa/data/model/pendaftaran_model.dart';
@@ -15,6 +16,20 @@ class PendaftaranService {
   }
   final _pendaftaran = FirebaseFirestore.instance.collection('pendaftaran');
   final _storage = FirebaseStorage.instance;
+
+  Future clearPendaftaran() async {
+    try {
+      QuerySnapshot querySnapshot = await _pendaftaran.get();
+
+      for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+        await docSnapshot.reference.delete();
+      }
+
+      log("Collection cleared successfully.");
+    } catch (e) {
+      log("Error clearing collection: $e");
+    }
+  }
 
   Future addPendaftaran({
     required String namaLengkap,

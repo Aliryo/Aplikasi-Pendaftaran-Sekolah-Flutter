@@ -23,20 +23,10 @@ class _SplashPageState extends State<SplashPage> {
     Timer(const Duration(seconds: 3), () {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SignInPage(),
-            ),
-            (route) => false);
+        Get.offAll(() => SignInPage());
       } else {
         controller.getCurrentUser(user.uid);
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  HomePage(),
-            ),
-            (route) => false);
+        Get.offAll(() => HomePage());
       }
     });
     super.initState();

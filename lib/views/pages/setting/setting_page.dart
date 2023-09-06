@@ -207,8 +207,8 @@ class SettingPage extends StatelessWidget {
               ),
               16.0.height,
               cardSetting(
-                  onTap: () {
-                    authController.logout();
+                  onTap: () async {
+                    await authController.logout();
                   },
                   icon: const Icon(
                     Icons.logout,

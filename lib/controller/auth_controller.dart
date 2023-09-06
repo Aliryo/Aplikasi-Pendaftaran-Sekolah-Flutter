@@ -209,7 +209,7 @@ class AuthController extends GetxController {
             password: passwordLoginController.text,
           );
           user.value = data;
-          Get.to(() => HomePage());
+          Get.offAll(() => HomePage());
           clearLogin();
         }
       }

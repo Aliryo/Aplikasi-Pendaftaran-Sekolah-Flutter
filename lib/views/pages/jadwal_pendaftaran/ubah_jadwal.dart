@@ -148,102 +148,100 @@ class UbahJadwal extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.42,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Tanggal Mulai",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              8.0.height,
-                              GestureDetector(
-                                onTap: () {
-                                  showDatePicker(
-                                          context: context,
-                                          initialDate:
-                                              controller.startdate.value,
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(2100))
-                                      .then((value) => controller.setStartDate(
-                                          value ?? DateTime.now()));
-                                },
-                                child: Container(
-                                  height: 60.h,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16.w, vertical: 12.h),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16.r),
-                                      color: Colors.blue[50]),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        DateFormat("dd MMMM yyyy")
-                                            .format(controller.startdate.value),
-                                      ),
-                                      Icon(
-                                        Icons.calendar_month_rounded,
-                                        color: Colors.green.withOpacity(0.5),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          )),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.42,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Tanggal Selesai",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              8.0.height,
-                              GestureDetector(
-                                onTap: () {
-                                  showDatePicker(
-                                          context: context,
-                                          initialDate: controller.endDate.value,
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(2100))
-                                      .then((value) => controller
-                                          .setEndDate(value ?? DateTime.now()));
-                                },
-                                child: Container(
-                                  height: 60.h,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16.w, vertical: 12.h),
-                                  decoration: BoxDecoration(
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Tanggal Mulai",
+                              style: TextStyle(
+                                  fontSize: 16.sp, fontWeight: FontWeight.w500),
+                            ),
+                            8.0.height,
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: controller.startdate.value,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100))
+                                    .then((value) => controller
+                                        .setStartDate(value ?? DateTime.now()));
+                              },
+                              child: Container(
+                                height: 60.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w, vertical: 12.h),
+                                decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16.r),
-                                    color: Colors.blue[50],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        DateFormat("dd MMMM yyyy")
-                                            .format(controller.endDate.value),
-                                      ),
-                                      Icon(
-                                        Icons.calendar_month_rounded,
-                                        color: Colors.green.withOpacity(0.5),
-                                      )
-                                    ],
-                                  ),
+                                    color: Colors.blue[50]),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat("dd MMMM yyyy")
+                                          .format(controller.startdate.value),
+                                    ),
+                                    Icon(
+                                      Icons.calendar_month_rounded,
+                                      color: Colors.green.withOpacity(0.5),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ))
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      8.0.width,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Tanggal Selesai",
+                              style: TextStyle(
+                                  fontSize: 16.sp, fontWeight: FontWeight.w500),
+                            ),
+                            8.0.height,
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: controller.endDate.value,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100))
+                                    .then((value) => controller
+                                        .setEndDate(value ?? DateTime.now()));
+                              },
+                              child: Container(
+                                height: 60.h,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w, vertical: 12.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.r),
+                                  color: Colors.blue[50],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat("dd MMMM yyyy")
+                                          .format(controller.endDate.value),
+                                    ),
+                                    Icon(
+                                      Icons.calendar_month_rounded,
+                                      color: Colors.green.withOpacity(0.5),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
             16.0.height,

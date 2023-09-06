@@ -105,12 +105,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignInPage(),
-                          ),
-                          (route) => false);
+                      Get.off(() => SignInPage());
                     },
                     child: const Text(
                       'Masuk',

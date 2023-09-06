@@ -1,6 +1,7 @@
 import 'package:aplikasi_pendaftaran_siswa/controller/auth_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/controller/pendaftaran_controller.dart';
 import 'package:aplikasi_pendaftaran_siswa/utils/double_extension.dart';
+import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/clear_alert.dart';
 import 'package:aplikasi_pendaftaran_siswa/views/pages/daftar_calon_siswa/widget_daftar_calon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,15 +40,33 @@ class _DaftarCalonSiswaPageState extends State<DaftarCalonSiswaPage> {
                   },
                   child: const Icon(Icons.arrow_back_ios_new_rounded)),
               12.0.width,
-              const Text(
-                'Daftar Calon Siswa Baru',
-                style: TextStyle(
+              Text(
+                authController.user.value.role == 'admin'
+                    ? 'Daftar Calon Siswa Baru'
+                    : 'Lihat Pendaftaran',
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
+          actions: [
+            authController.user.value.role == 'admin'
+                ? GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context, builder: (context) => ClearAlert());
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 16.w),
+                      child: const Icon(
+                        Icons.delete,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+          ],
         ),
         body: Obx(() {
           return pendaftaranController.isGetLoading.value

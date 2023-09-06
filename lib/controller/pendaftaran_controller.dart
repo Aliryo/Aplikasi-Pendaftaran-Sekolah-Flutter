@@ -125,6 +125,19 @@ class PendaftaranController extends GetxController {
     }
   }
 
+  Future clearPendaftaran() async {
+    try {
+      isGetLoading.value = true;
+      await PendaftaranService().clearPendaftaran();
+      await getListPendaftaran();
+      Get.back();
+      isGetLoading.value = false;
+    } catch (e) {
+      isGetLoading.value = false;
+      log(e.toString());
+    }
+  }
+
   Future addPendaftarBaru() async {
     try {
       isPendaftaranLoading.value = true;
@@ -280,8 +293,9 @@ class PendaftaranController extends GetxController {
                 ),
                 pw.Padding(
                   padding: pw.EdgeInsets.symmetric(vertical: 6.h),
-                  child: pw.Text(DateFormat("dd MMMM yyyy")
-                      .format(pendaftaran.tanggalLahir ?? DateTime.now()),
+                  child: pw.Text(
+                      DateFormat("dd MMMM yyyy")
+                          .format(pendaftaran.tanggalLahir ?? DateTime.now()),
                       style: pw.TextStyle(
                           fontSize: 12.sp,
                           color: PdfColors.black,
@@ -297,8 +311,8 @@ class PendaftaranController extends GetxController {
                 ),
                 pw.Padding(
                   padding: pw.EdgeInsets.symmetric(vertical: 6.h),
-                  child:
-                      pw.Text("${(pendaftaran.tempatLahir ?? '').capitalize}",
+                  child: pw.Text(
+                      "${(pendaftaran.tempatLahir ?? '').capitalize}",
                       style: pw.TextStyle(
                           fontSize: 12.sp,
                           color: PdfColors.black,
@@ -332,7 +346,8 @@ class PendaftaranController extends GetxController {
                   padding: pw.EdgeInsets.symmetric(vertical: 6.h),
                   child: pw.Text(
                     pendaftaran.status ?? '',
-                    style: pw.TextStyle(fontSize: 12.sp,
+                    style: pw.TextStyle(
+                        fontSize: 12.sp,
                         color: PdfColor.fromHex(color),
                         fontWeight: pw.FontWeight.normal),
                   ),
